@@ -434,7 +434,26 @@
         </div>
         <div class="form-group">
           <label>Time of Birth</label>
-          <input type="time" id="tob" />
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <select id="tob-hour">
+              <option value="">Hour</option>
+              <option>12 AM</option><option>1 AM</option><option>2 AM</option>
+              <option>3 AM</option><option>4 AM</option><option>5 AM</option>
+              <option>6 AM</option><option>7 AM</option><option>8 AM</option>
+              <option>9 AM</option><option>10 AM</option><option>11 AM</option>
+              <option>12 PM</option><option>1 PM</option><option>2 PM</option>
+              <option>3 PM</option><option>4 PM</option><option>5 PM</option>
+              <option>6 PM</option><option>7 PM</option><option>8 PM</option>
+              <option>9 PM</option><option>10 PM</option><option>11 PM</option>
+            </select>
+            <select id="tob-min">
+              <option value="">Min</option>
+              <option>00</option><option>05</option><option>10</option>
+              <option>15</option><option>20</option><option>25</option>
+              <option>30</option><option>35</option><option>40</option>
+              <option>45</option><option>50</option><option>55</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="form-row">
@@ -678,7 +697,9 @@ document.getElementById('astro-form').addEventListener('submit', function(e) {
 
   const name    = document.getElementById('name').value.trim();
   const dobVal  = document.getElementById('dob').value;
-  const tobVal  = document.getElementById('tob').value;
+  const tobHour = document.getElementById('tob-hour').value;
+  const tobMin  = document.getElementById('tob-min').value;
+  const tobVal  = tobHour ? `${tobHour}${tobMin ? ':' + tobMin : ''}` : '';
   const concern = document.getElementById('concern').value;
 
   if (!dobVal) return;

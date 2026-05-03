@@ -734,6 +734,177 @@
       left: 0; top: 2px;
     }
 
+    /* ── Forecast (yearly / monthly) ── */
+    .forecast-banner {
+      background: linear-gradient(135deg, rgba(123,45,139,0.25), rgba(201,168,76,0.1));
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 16px;
+      padding: 22px 26px;
+    }
+    .fcb-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      letter-spacing: 0.06em;
+    }
+    .fcb-dates {
+      font-size: 0.92rem;
+      color: rgba(232,220,200,0.75);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .fcb-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .fcb-chip {
+      font-size: 0.82rem;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid rgba(201,168,76,0.3);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+    }
+    .forecast-sub-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      color: rgba(201,168,76,0.85);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 24px 0 12px;
+    }
+    .forecast-dasha-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .forecast-dasha-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(201,168,76,0.1);
+      background: rgba(255,255,255,0.03);
+      flex-wrap: wrap;
+    }
+    .forecast-dasha-row.fc-current {
+      border-color: rgba(201,168,76,0.4);
+      background: linear-gradient(90deg, rgba(123,45,139,0.22), rgba(201,168,76,0.06));
+    }
+    .fdr-planets {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .fdr-md, .fdr-ad {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+    }
+    .fdr-sep { color: rgba(201,168,76,0.5); font-size: 1.1rem; }
+    .fdr-badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+    .fdr-dates {
+      font-size: 0.85rem;
+      color: rgba(232,220,200,0.65);
+      font-style: italic;
+    }
+    .forecast-themes {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .forecast-theme-card {
+      border-radius: 12px;
+      padding: 18px 20px;
+      border: 1px solid rgba(201,168,76,0.18);
+      background: rgba(255,255,255,0.03);
+    }
+    .ft-jupiter {
+      border-color: rgba(240,208,128,0.3);
+      background: linear-gradient(135deg, rgba(20,30,5,0.5), rgba(13,6,32,0.9));
+    }
+    .ft-saturn {
+      border-color: rgba(160,180,204,0.3);
+      background: linear-gradient(135deg, rgba(10,15,25,0.5), rgba(13,6,32,0.9));
+    }
+    .ft-rahu {
+      border-color: rgba(192,132,252,0.3);
+      background: linear-gradient(135deg, rgba(20,5,35,0.5), rgba(13,6,32,0.9));
+    }
+    .ft-sun {
+      border-color: rgba(255,204,68,0.3);
+      background: linear-gradient(135deg, rgba(35,20,5,0.5), rgba(13,6,32,0.9));
+    }
+    .ft-prat {
+      border-color: rgba(201,168,76,0.3);
+      background: linear-gradient(135deg, rgba(123,45,139,0.18), rgba(13,6,32,0.9));
+    }
+    .ftc-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .ftc-icon {
+      font-size: 1.6rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .ftc-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+    .ftc-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(232,220,200,0.88);
+    }
+    .forecast-remedy-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      padding: 20px 22px;
+    }
+    .frb-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+    }
+    .forecast-transit-strip {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .fts-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.65);
+      margin-bottom: 10px;
+    }
+
     /* ── Vichar (deep deliberation) blocks ── */
     .vichar-block {
       display: flex;
@@ -980,21 +1151,20 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Gender</label>
-          <select id="gender">
-            <option value="neutral">Prefer not to say</option>
-            <option value="female">Female</option>
-            <option value="male">Male</option>
-            <option value="other">Other</option>
+          <label>Reading Type</label>
+          <select id="reading-type">
+            <option value="general">General Lifetime Reading</option>
+            <option value="yearly">Yearly Predictions</option>
+            <option value="monthly">Monthly Predictions</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Current Concern</label>
+          <label>Focus Area</label>
           <select id="concern">
-            <option value="general">General Reading</option>
-            <option value="career">Career & Wealth</option>
-            <option value="love">Love & Relationships</option>
-            <option value="health">Health & Wellbeing</option>
+            <option value="general">All Areas of Life</option>
+            <option value="career">Career &amp; Wealth</option>
+            <option value="love">Love &amp; Relationships</option>
+            <option value="health">Health &amp; Wellbeing</option>
             <option value="spiritual">Spiritual Growth</option>
           </select>
         </div>
@@ -1060,6 +1230,7 @@
 <script src="yoga.js"></script>
 <script src="dasha.js"></script>
 <script src="vichar.js"></script>
+<script src="forecast.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

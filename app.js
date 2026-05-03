@@ -40,12 +40,13 @@
   document.getElementById('astro-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const name    = document.getElementById('name').value.trim();
-    const pobRaw  = document.getElementById('pob').value.trim();
-    const dobVal  = document.getElementById('dob').value;
-    const tobHour = document.getElementById('tob-hour').value;
-    const tobMin  = document.getElementById('tob-min').value;
-    const concern = document.getElementById('concern').value;
+    const name        = document.getElementById('name').value.trim();
+    const pobRaw      = document.getElementById('pob').value.trim();
+    const dobVal      = document.getElementById('dob').value;
+    const tobHour     = document.getElementById('tob-hour').value;
+    const tobMin      = document.getElementById('tob-min').value;
+    const concern     = document.getElementById('concern').value;
+    const readingType = document.getElementById('reading-type').value;
 
     if (!name || !pobRaw || !dobVal || tobHour === '' || tobMin === '') {
       alert('Please fill in your name, place of birth, date of birth, and time of birth — all four are essential for an accurate chart.');
@@ -90,13 +91,18 @@
     const ksdVichar    = window.Vichar.buildKaalSarpVichar(positions, lagnaSignIdx);
     const mdVichar     = window.Vichar.buildMangalVichar(positions, lagnaSignIdx);
 
+    const birthDate    = new Date(yyyy, mm-1, dd);
+    const yearlyFc     = window.Forecast.buildYearlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
+    const monthlyFc    = window.Forecast.buildMonthlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
+
     renderResults({
-      name, city, dob: new Date(yyyy, mm-1, dd),
+      name, city, dob: birthDate, readingType,
       hour, minute, concern,
       chart, lagnaDecoded, moonDecoded, sunDecoded,
       positions, doshas, remedies, houseRead, dashaResult,
       yogas, navamsha, aspectInsights,
-      ssVichar, ksdVichar, mdVichar
+      ssVichar, ksdVichar, mdVichar,
+      yearlyFc, monthlyFc
     });
   });
 
@@ -107,12 +113,12 @@
     const timeStr = `${String(d.hour).padStart(2,'0')}:${String(d.minute).padStart(2,'0')}`;
     const dateStr = d.dob.toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
 
-    // Three primary identifiers — Lagna (rising), Moon sign (Janma Rashi), Sun sign
     const lagna    = d.lagnaDecoded.sign;
     const moonSign = d.moonDecoded.sign;
     const sunSign  = d.sunDecoded.sign;
 
-    let html = `
+    // ── Shared header (used by all three reading types) ──
+    const sharedHeader = `
       <div class="result-header">
         <div class="greeting">Namaste, ${escapeHtml(d.name)} 🙏</div>
         <p class="birth-line">
@@ -128,8 +134,58 @@
         ${trioCard('Lagna (Ascendant)', lagna, d.lagnaDecoded, 'Your outer self, body and personality')}
         ${trioCard('Janma Rashi (Moon)', moonSign, d.moonDecoded, 'Your mind, emotions and destiny')}
         ${trioCard('Surya Rashi (Sun)', sunSign, d.sunDecoded, 'Your soul, will and life force')}
-      </div>
+      </div>`;
 
+    // ── YEARLY READING ──
+    if (d.readingType === 'yearly') {
+      let html = sharedHeader;
+      html += `
+        <h3 class="section-title">✦ Yearly Predictions — Birthday Year ✦</h3>
+        <p class="section-note">Predictions from your last birthday to your next birthday, based on the active Vimshottari Dasha periods and the transits of Jupiter, Saturn, and Rahu through your chart houses.</p>
+        ${window.Forecast.renderYearlyHTML(d.yearlyFc)}
+
+        <h3 class="section-title">✦ Universal Daily Practices ✦</h3>
+        <div class="universal-block">
+          <ul class="universal-list">
+            <li><strong>Sunrise:</strong> Offer water (Arghya) to the rising Sun while reciting <em>Om Suryaya Namaha</em>.</li>
+            <li><strong>Daily:</strong> 10 minutes of pranayama and silent meditation.</li>
+            <li><strong>Tuesday &amp; Saturday:</strong> Recite Hanuman Chalisa to neutralise malefic Mars, Saturn, Rahu, and Ketu.</li>
+            <li><strong>Service (Seva):</strong> Feed dogs, cows, or birds; serve elders — the most powerful upaya in Jyotish.</li>
+          </ul>
+        </div>
+        <button class="reset-btn" onclick="document.getElementById('results').style.display='none';document.getElementById('astro-form').reset();document.querySelector('.form-section').scrollIntoView({behavior:'smooth'});">✦ New Reading ✦</button>
+        <p class="disclaimer">Yearly predictions are based on sidereal transit positions and Vimshottari Dasha timing. For precision timing and specific events, consult a qualified Jyotishi.</p>`;
+      r.innerHTML = html;
+      r.scrollIntoView({ behavior:'smooth', block:'start' });
+      return;
+    }
+
+    // ── MONTHLY READING ──
+    if (d.readingType === 'monthly') {
+      let html = sharedHeader;
+      html += `
+        <h3 class="section-title">✦ Monthly Predictions ✦</h3>
+        <p class="section-note">Predictions for the current month based on the active Pratyantar Dasha sub-period and the monthly transit positions of the Sun, Jupiter, Saturn, and Rahu through your chart houses.</p>
+        ${window.Forecast.renderMonthlyHTML(d.monthlyFc)}
+
+        <h3 class="section-title">✦ Universal Daily Practices ✦</h3>
+        <div class="universal-block">
+          <ul class="universal-list">
+            <li><strong>Sunrise:</strong> Offer water (Arghya) to the rising Sun while reciting <em>Om Suryaya Namaha</em>.</li>
+            <li><strong>Daily:</strong> 10 minutes of pranayama and silent meditation.</li>
+            <li><strong>Tuesday &amp; Saturday:</strong> Recite Hanuman Chalisa to neutralise malefic Mars, Saturn, Rahu, and Ketu.</li>
+            <li><strong>Service (Seva):</strong> Feed dogs, cows, or birds; serve elders — the most powerful upaya in Jyotish.</li>
+          </ul>
+        </div>
+        <button class="reset-btn" onclick="document.getElementById('results').style.display='none';document.getElementById('astro-form').reset();document.querySelector('.form-section').scrollIntoView({behavior:'smooth'});">✦ New Reading ✦</button>
+        <p class="disclaimer">Monthly predictions are based on Pratyantar Dasha timing and mid-month transit positions. For week-by-week or day-specific guidance, consult a qualified Jyotishi.</p>`;
+      r.innerHTML = html;
+      r.scrollIntoView({ behavior:'smooth', block:'start' });
+      return;
+    }
+
+    // ── GENERAL LIFETIME READING (default) ──
+    let html = sharedHeader + `
       <h3 class="section-title">✦ Planetary Positions (Graha Sthiti) ✦</h3>
       <div class="table-wrap">
         <table class="planet-table">

@@ -79,6 +79,19 @@
     const sunDecoded   = window.Interpret.decodeLongitude(sidereal.Sun);
 
     const positions    = window.Interpret.buildPositions(sidereal, lagnaSignIdx, sidereal.Sun);
+
+    // Retrograde detection — compare longitude at jd vs jd+1
+    positions.forEach(p => {
+      if (['Sun','Moon'].includes(p.planet))   { p.retrograde = false; return; }
+      if (['Rahu','Ketu'].includes(p.planet))  { p.retrograde = true;  return; }
+      const l0 = window.Astro.planetLongitude(p.planet, chart.jd);
+      const l1 = window.Astro.planetLongitude(p.planet, chart.jd + 1);
+      let diff = l1 - l0;
+      if (diff > 180) diff -= 360;
+      if (diff < -180) diff += 360;
+      p.retrograde = diff < 0;
+    });
+
     const doshas       = window.Interpret.detectDoshas(positions, lagnaSignIdx, new Date());
     const remedies     = window.Interpret.buildRemedies(doshas, positions);
     const houseRead    = window.Interpret.buildHousePredictions(positions, lagnaSignIdx, concern);
@@ -134,7 +147,11 @@
         ${trioCard('Lagna (Ascendant)', lagna, d.lagnaDecoded, 'Your outer self, body and personality')}
         ${trioCard('Janma Rashi (Moon)', moonSign, d.moonDecoded, 'Your mind, emotions and destiny')}
         ${trioCard('Surya Rashi (Sun)', sunSign, d.sunDecoded, 'Your soul, will and life force')}
-      </div>`;
+      </div>
+
+      <h3 class="section-title">✦ Rashi Chakra ✦</h3>
+      <p class="section-note" style="margin-bottom:14px">North Indian chart — Lagna (Ascendant) always in the top-centre cell. Houses run clockwise. Planet symbols: Su Sun · Mo Moon · Ma Mars · Me Mercury · Ju Jupiter · Ve Venus · Sa Saturn · Ra Rahu · Ke Ketu · ℞ retrograde.</p>
+      ${renderChartHTML(d.positions, d.lagnaDecoded.signIdx, d.name)}`;
 
     // ── YEARLY READING ──
     if (d.readingType === 'yearly') {
@@ -288,6 +305,57 @@
     r.scrollIntoView({ behavior:'smooth', block:'start' });
   }
 
+  // ── Rashi Chakra (North Indian grid chart) ──
+  function renderChartHTML(positions, lagnaSignIdx, name) {
+    // Grid position for each house (CSS grid-area: row-start/col-start/row-end/col-end, 1-indexed)
+    const CELL = [null,
+      '1/2/2/3', '1/3/2/4', '1/4/2/5', '2/4/3/5',
+      '3/4/4/5', '4/4/5/5', '4/3/5/4', '4/2/5/3',
+      '4/1/5/2', '3/1/4/2', '2/1/3/2', '1/1/2/2'
+    ];
+    const ABBR  = { Sun:'Su', Moon:'Mo', Mars:'Ma', Mercury:'Me', Jupiter:'Ju', Venus:'Ve', Saturn:'Sa', Rahu:'Ra', Ketu:'Ke' };
+    const PCLS  = { Sun:'pl-sun', Moon:'pl-moon', Mars:'pl-mars', Mercury:'pl-mercury', Jupiter:'pl-jupiter', Venus:'pl-venus', Saturn:'pl-saturn', Rahu:'pl-rahu', Ketu:'pl-ketu' };
+
+    const houseMap = {};
+    for (let i = 1; i <= 12; i++) houseMap[i] = [];
+    positions.forEach(p => houseMap[p.house].push(p));
+
+    let html = '<div class="rashi-chart-wrap"><div class="rashi-chart">';
+
+    for (let h = 1; h <= 12; h++) {
+      const signIdx = (lagnaSignIdx + h - 1) % 12;
+      const sign    = SIGNS[signIdx];
+      const planets = houseMap[h];
+      const isAsc   = h === 1;
+
+      html += `<div class="rc-house${isAsc ? ' rc-lagna' : ''}" style="grid-area:${CELL[h]}">`;
+      html += `<div class="rc-hnum">${h}</div>`;
+      if (isAsc) html += `<div class="rc-asc">Asc</div>`;
+      html += `<div class="rc-symbol">${sign.symbol}</div>`;
+      html += `<div class="rc-sign-name">${sign.name}</div>`;
+
+      if (planets.length) {
+        html += '<div class="rc-planets">';
+        planets.forEach(p => {
+          const r = p.retrograde ? ' retro' : '';
+          html += `<span class="rc-pl ${PCLS[p.planet]}${r}">${ABBR[p.planet]}${p.retrograde ? '℞' : ''}</span>`;
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+
+    // Center cell
+    html += `
+      <div class="rc-center">
+        <div class="rc-center-title">Rashi<br/>Chakra</div>
+        <div class="rc-center-sub">${escapeHtml(name)}</div>
+      </div>`;
+
+    html += '</div></div>';
+    return html;
+  }
+
   function trioCard(label, sign, decoded, sub) {
     return `
       <div class="trio-card">
@@ -305,15 +373,19 @@
     const dignityClass = ['exalted','own sign','moolatrikona','friendly'].includes(p.dignity) ? 'good'
                        : ['debilitated','inimical'].includes(p.dignity) ? 'bad'
                        : '';
-    const status = p.combust ? `${p.dignity}, combust` : p.dignity;
+    const retroStr = p.retrograde ? ' <span style="color:var(--gold);font-size:0.75em">℞</span>' : '';
+    const statusParts = [];
+    if (p.retrograde) statusParts.push('retrograde');
+    if (p.combust)    statusParts.push('combust');
+    statusParts.push(p.dignity);
     return `
       <tr>
-        <td><strong>${p.planet}</strong></td>
+        <td><strong>${p.planet}</strong>${retroStr}</td>
         <td>${p.sign.symbol} ${p.sign.name}</td>
         <td>${fmtDeg(p.degInSign)}</td>
         <td>${p.house}</td>
         <td>${p.nakshatra.n} (${p.pada})</td>
-        <td class="${dignityClass}">${status}</td>
+        <td class="${dignityClass}">${statusParts.join(', ')}</td>
       </tr>`;
   }
 

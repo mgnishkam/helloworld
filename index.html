@@ -734,6 +734,89 @@
       left: 0; top: 2px;
     }
 
+    /* ── Ashtakavarga ── */
+    .av-block { display: flex; flex-direction: column; gap: 20px; }
+    .av-sub-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .av-note {
+      font-size: 0.87rem;
+      color: rgba(232,220,200,0.65);
+      font-style: italic;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+    /* Transit cards */
+    .av-transit-section, .av-sarva-section, .av-bhinna-section {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 14px;
+      padding: 20px 22px;
+    }
+    .av-transit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+    .av-transit-card {
+      border-radius: 10px;
+      padding: 12px 10px;
+      border: 1px solid rgba(201,168,76,0.15);
+      background: rgba(255,255,255,0.03);
+      text-align: center;
+    }
+    .av-strong   { border-color: rgba(127,219,150,0.4) !important; background: linear-gradient(135deg, rgba(10,40,20,0.4), rgba(13,6,32,0.85)) !important; }
+    .av-moderate { border-color: rgba(201,168,76,0.3)  !important; }
+    .av-weak     { border-color: rgba(255,123,123,0.35) !important; background: linear-gradient(135deg, rgba(50,10,10,0.3), rgba(13,6,32,0.85)) !important; }
+    .av-tc-planet { font-family:'Cinzel',serif; font-size:0.82rem; margin-bottom:4px; }
+    .av-tc-sign   { font-size:0.78rem; color:rgba(232,220,200,0.75); margin-bottom:3px; }
+    .av-tc-pts    { font-family:'Cinzel',serif; font-size:1.1rem; color:var(--gold-light); }
+    .av-tc-quality { font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(201,168,76,0.7); margin:3px 0; }
+    .av-tc-bar    { height:4px; background:rgba(255,255,255,0.08); border-radius:2px; overflow:hidden; margin-top:4px; }
+    .av-tc-fill   { height:100%; background:var(--gold); border-radius:2px; transition:width 0.4s; }
+    /* Sarva grid */
+    .av-sarva-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .av-sarva-cell {
+      border-radius: 8px;
+      padding: 10px 12px;
+      border: 1px solid rgba(201,168,76,0.12);
+      background: rgba(255,255,255,0.02);
+    }
+    .av-sc-sign  { font-size:0.78rem; color:rgba(232,220,200,0.8); margin-bottom:3px; }
+    .av-sc-pts   { font-family:'Cinzel',serif; font-size:1.3rem; color:var(--gold-light); line-height:1; }
+    .av-sc-bar   { height:3px; background:rgba(255,255,255,0.08); border-radius:2px; overflow:hidden; margin:5px 0 3px; }
+    .av-sc-fill  { height:100%; background:var(--gold); border-radius:2px; }
+    .av-sc-label { font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(201,168,76,0.55); }
+    /* Extremes */
+    .av-extremes { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .av-ext-block { border-radius:10px; padding:14px 16px; border:1px solid rgba(201,168,76,0.15); }
+    .av-ext-block.av-strong { border-color:rgba(127,219,150,0.3); background:rgba(10,40,20,0.3); }
+    .av-ext-block.av-weak   { border-color:rgba(255,123,123,0.3); background:rgba(50,10,10,0.25); }
+    .av-ext-title { font-family:'Cinzel',serif; font-size:0.75rem; color:var(--gold); letter-spacing:0.1em; margin-bottom:8px; }
+    .av-ext-row   { font-size:0.85rem; color:rgba(232,220,200,0.82); margin-bottom:4px; }
+    /* Bhinna table */
+    .av-table-wrap { overflow-x:auto; }
+    .av-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+    .av-table th, .av-table td { padding:8px 10px; text-align:center; border-bottom:1px solid rgba(201,168,76,0.08); }
+    .av-table th { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.1em; color:var(--gold); text-transform:uppercase; }
+    .av-table td:first-child { text-align:left; }
+    .av-pts-good { color:var(--good); font-weight:600; }
+    .av-pts-bad  { color:var(--bad); }
+    .av-strong-text  { color:var(--good); font-weight:600; }
+    .av-moderate-text { color:var(--gold); }
+    .av-weak-text     { color:var(--bad); }
+    .av-sarva-cell-inline { font-weight:600; }
+
     /* ── Panchang ── */
     .panchang-block {
       display: flex;
@@ -1453,6 +1536,7 @@
 <script src="dasha.js"></script>
 <script src="vichar.js"></script>
 <script src="panchang.js"></script>
+<script src="ashtakavarga.js"></script>
 <script src="forecast.js"></script>
 <script src="app.js"></script>
 </body>

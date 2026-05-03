@@ -106,6 +106,7 @@
 
     const birthDate    = new Date(yyyy, mm-1, dd);
     const todayPanchang = window.Panchang.computePanchang(new Date());
+    const avData        = window.Ashtakavarga.buildAshtakavarga(positions, lagnaSignIdx, sidereal);
     const yearlyFc     = window.Forecast.buildYearlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
     const monthlyFc    = window.Forecast.buildMonthlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
 
@@ -116,7 +117,7 @@
       positions, doshas, remedies, houseRead, dashaResult,
       yogas, navamsha, aspectInsights,
       ssVichar, ksdVichar, mdVichar,
-      yearlyFc, monthlyFc, todayPanchang
+      yearlyFc, monthlyFc, todayPanchang, avData
     });
   });
 
@@ -266,6 +267,13 @@
         <p class="section-note">No major doshas detected in this chart. The grahas are well placed; continue your spiritual practices and treat each planet's auspicious day with reverence to maintain this harmony.</p>
       `;
     }
+
+    // Ashtakavarga
+    html += `
+      <h3 class="section-title">✦ Ashtakavarga — 8-Source Point System ✦</h3>
+      <p class="section-note">Ashtakavarga is Jyotish's most trusted transit-prediction tool. Each of the 7 planets casts benefic points into signs based on 8 sources (7 planets + Lagna). A planet transiting a sign where it has ≥ its threshold points produces strong results; fewer points = delays or reduced results.</p>
+      ${window.Ashtakavarga.renderAshtakavargaHTML(d.avData)}
+    `;
 
     // Dosha Vichar
     html += `

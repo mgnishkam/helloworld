@@ -5,22 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hello</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f4ff;
-        font-family: sans-serif;
+        background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #533483);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
       }
+
+      @keyframes gradientShift {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .container {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        animation: fadeIn 1.5s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
       h1 {
-        font-size: 4rem;
-        color: #333;
+        font-size: 8rem;
+        font-weight: 800;
+        color: #ffffff;
+        text-shadow:
+          0 0 20px rgba(255, 255, 255, 0.5),
+          0 0 60px rgba(150, 100, 255, 0.6),
+          0 0 100px rgba(100, 150, 255, 0.4);
+        letter-spacing: 0.1em;
+        animation: pulse 3s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { text-shadow:
+          0 0 20px rgba(255, 255, 255, 0.5),
+          0 0 60px rgba(150, 100, 255, 0.6),
+          0 0 100px rgba(100, 150, 255, 0.4); }
+        50% { text-shadow:
+          0 0 30px rgba(255, 255, 255, 0.9),
+          0 0 80px rgba(180, 120, 255, 0.9),
+          0 0 140px rgba(120, 180, 255, 0.7); }
+      }
+
+      .subtitle {
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+
+      .particles {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .dot {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        animation: float linear infinite;
+      }
+
+      @keyframes float {
+        0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+        10%  { opacity: 1; }
+        90%  { opacity: 1; }
+        100% { transform: translateY(-10vh) scale(1); opacity: 0; }
       }
     </style>
   </head>
   <body>
-    <h1>Hello</h1>
+    <div class="particles" id="particles"></div>
+    <div class="container">
+      <h1>Hello</h1>
+      <p class="subtitle">Welcome to my website</p>
+    </div>
+
+    <script>
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        const size = Math.random() * 8 + 3;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.left = Math.random() * 100 + 'vw';
+        dot.style.animationDuration = (Math.random() * 10 + 8) + 's';
+        dot.style.animationDelay = (Math.random() * 10) + 's';
+        container.appendChild(dot);
+      }
+    </script>
   </body>
 </html>

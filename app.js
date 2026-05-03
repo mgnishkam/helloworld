@@ -86,13 +86,17 @@
     const navamsha     = window.Yoga.buildNavamsha(sidereal);
     const aspects      = window.Yoga.buildAspects(positions);
     const aspectInsights = window.Yoga.buildAspectInsights(positions, lagnaSignIdx, aspects);
+    const ssVichar     = window.Vichar.buildSadeSatiVichar(moonDecoded.signIdx, moonDecoded, yyyy);
+    const ksdVichar    = window.Vichar.buildKaalSarpVichar(positions, lagnaSignIdx);
+    const mdVichar     = window.Vichar.buildMangalVichar(positions, lagnaSignIdx);
 
     renderResults({
       name, city, dob: new Date(yyyy, mm-1, dd),
       hour, minute, concern,
       chart, lagnaDecoded, moonDecoded, sunDecoded,
       positions, doshas, remedies, houseRead, dashaResult,
-      yogas, navamsha, aspectInsights
+      yogas, navamsha, aspectInsights,
+      ssVichar, ksdVichar, mdVichar
     });
   });
 
@@ -184,6 +188,21 @@
         <p class="section-note">No major doshas detected in this chart. The grahas are well placed; continue your spiritual practices and treat each planet's auspicious day with reverence to maintain this harmony.</p>
       `;
     }
+
+    // Dosha Vichar
+    html += `
+      <h3 class="section-title">✦ Shani Sade Sati — Deep Vichar ✦</h3>
+      <p class="section-note">Sade Sati is the seven-and-a-half-year transit of Saturn through the 12th, 1st and 2nd houses from your natal Moon. Each person experiences it 2–3 times in a lifetime. Below is a detailed reading based on your Janma Rashi and the present Saturn position.</p>
+      ${window.Vichar.renderSadeSatiHTML(d.ssVichar)}
+
+      <h3 class="section-title">✦ Kaal Sarp Dosha — Deep Vichar ✦</h3>
+      <p class="section-note">Kaal Sarp Dosha forms when all seven visible planets are hemmed between the Rahu-Ketu nodal axis. Tradition assigns 12 named types — each with distinct karmic terrain, life themes, and remedies.</p>
+      ${window.Vichar.renderKaalSarpHTML(d.ksdVichar)}
+
+      <h3 class="section-title">✦ Mangal Dosha — Deep Vichar ✦</h3>
+      <p class="section-note">Mangal Dosha arises when Mars occupies the 1st, 2nd, 4th, 7th, 8th, or 12th house from Lagna, Moon, or Venus. Traditional astrology assesses it from all three reference points for a complete picture.</p>
+      ${window.Vichar.renderMangalHTML(d.mdVichar)}
+    `;
 
     // Universal daily practices
     html += `

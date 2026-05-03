@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jyotish — Indian Astrology Predictions</title>
+  <title>Jyotish — Vedic Astrology Predictions</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
 
@@ -16,6 +16,8 @@
       --mid: #1a0d35;
       --accent: #7b2d8b;
       --text: #e8dcc8;
+      --good: #7fdb96;
+      --bad:  #ff7b7b;
     }
 
     body {
@@ -28,35 +30,29 @@
 
     /* ── Stars background ── */
     #stars-canvas {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
-      z-index: 0;
-      pointer-events: none;
+      z-index: 0; pointer-events: none;
     }
 
     /* ── Hero ── */
     .hero {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       text-align: center;
-      padding: 80px 20px 60px;
+      padding: 70px 20px 50px;
     }
-
     .om-symbol {
       font-size: 3.5rem;
       color: var(--gold);
       text-shadow: 0 0 30px rgba(201,168,76,0.8);
       animation: glow 3s ease-in-out infinite;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       display: block;
     }
-
     @keyframes glow {
       0%,100% { text-shadow: 0 0 20px rgba(201,168,76,0.6); }
       50%      { text-shadow: 0 0 50px rgba(201,168,76,1), 0 0 80px rgba(240,208,128,0.5); }
     }
-
     .hero h1 {
       font-family: 'Cinzel', serif;
       font-size: clamp(2.2rem, 6vw, 4rem);
@@ -65,10 +61,9 @@
       letter-spacing: 0.08em;
       line-height: 1.2;
     }
-
     .hero h1 span {
       display: block;
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
       font-weight: 400;
       color: rgba(201,168,76,0.7);
       letter-spacing: 0.35em;
@@ -76,65 +71,62 @@
       font-family: 'EB Garamond', serif;
       font-style: italic;
     }
-
     .divider {
-      margin: 24px auto;
-      width: 200px;
-      height: 1px;
+      margin: 22px auto;
+      width: 200px; height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
-
     .hero p {
-      max-width: 580px;
+      max-width: 620px;
       margin: 0 auto;
-      font-size: 1.15rem;
-      line-height: 1.8;
+      font-size: 1.1rem;
+      line-height: 1.75;
       color: rgba(232,220,200,0.8);
       font-style: italic;
     }
 
     /* ── Form card ── */
     .form-section {
-      position: relative;
-      z-index: 1;
-      max-width: 560px;
-      margin: 0 auto 60px;
+      position: relative; z-index: 1;
+      max-width: 580px;
+      margin: 0 auto 50px;
       padding: 0 20px;
     }
-
     .card {
       background: linear-gradient(135deg, rgba(26,13,53,0.95), rgba(13,6,32,0.98));
       border: 1px solid rgba(201,168,76,0.3);
       border-radius: 16px;
-      padding: 40px 36px;
+      padding: 36px 32px;
       box-shadow: 0 0 60px rgba(123,45,139,0.3), 0 0 120px rgba(201,168,76,0.1);
     }
-
     .card h2 {
       font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: var(--gold);
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       letter-spacing: 0.1em;
     }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
+    .form-group { margin-bottom: 18px; }
     label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(201,168,76,0.8);
-      margin-bottom: 8px;
+      color: rgba(201,168,76,0.85);
+      margin-bottom: 6px;
     }
-
+    label .hint {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: none;
+      font-style: italic;
+      color: rgba(201,168,76,0.55);
+      margin-left: 6px;
+    }
     input, select {
       width: 100%;
-      padding: 12px 16px;
+      padding: 11px 14px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(201,168,76,0.25);
       border-radius: 8px;
@@ -144,23 +136,19 @@
       transition: border-color 0.3s, box-shadow 0.3s;
       outline: none;
     }
-
     input:focus, select:focus {
       border-color: var(--gold);
       box-shadow: 0 0 12px rgba(201,168,76,0.25);
     }
-
     select option { background: #1a0d35; }
-
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
     }
-
     .btn {
       width: 100%;
-      margin-top: 10px;
+      margin-top: 8px;
       padding: 14px;
       background: linear-gradient(135deg, #7b2d8b, #c9a84c);
       border: none;
@@ -173,7 +161,6 @@
       transition: opacity 0.3s, transform 0.2s, box-shadow 0.3s;
       box-shadow: 0 4px 20px rgba(123,45,139,0.4);
     }
-
     .btn:hover {
       opacity: 0.9;
       transform: translateY(-2px);
@@ -185,204 +172,314 @@
       display: none;
       position: relative;
       z-index: 1;
-      max-width: 860px;
+      max-width: 980px;
       margin: 0 auto 80px;
       padding: 0 20px;
       animation: fadeUp 0.8s ease forwards;
     }
-
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(40px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    .result-header {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-
-    .result-header .greeting {
+    .result-header { text-align: center; margin-bottom: 30px; }
+    .greeting {
       font-size: clamp(1.5rem, 4vw, 2.2rem);
       color: var(--gold-light);
       font-family: 'Cinzel', serif;
     }
-
-    .rashi-badge {
-      display: inline-block;
-      margin: 20px auto;
-      padding: 18px 36px;
-      background: linear-gradient(135deg, rgba(123,45,139,0.4), rgba(201,168,76,0.15));
-      border: 1px solid var(--gold);
-      border-radius: 100px;
-      text-align: center;
-    }
-
-    .rashi-badge .symbol { font-size: 2.5rem; display: block; }
-    .rashi-badge .rashi-name {
-      font-family: 'Cinzel', serif;
-      font-size: 1.4rem;
-      color: var(--gold-light);
-      display: block;
-    }
-    .rashi-badge .rashi-sub {
+    .birth-line {
+      margin-top: 8px;
+      color: rgba(232,220,200,0.7);
       font-style: italic;
-      color: rgba(201,168,76,0.7);
       font-size: 0.95rem;
     }
+    .birth-line.tiny { font-size: 0.82rem; opacity: 0.55; }
 
-    .info-grid {
+    /* ── Trio of Lagna / Moon / Sun ── */
+    .trio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 14px;
-      margin: 28px 0;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 30px 0;
     }
-
-    .info-tile {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 12px;
-      padding: 16px;
+    .trio-card {
+      background: linear-gradient(135deg, rgba(123,45,139,0.25), rgba(201,168,76,0.08));
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 14px;
+      padding: 22px;
       text-align: center;
     }
-
-    .info-tile .tile-label {
-      font-size: 0.75rem;
+    .trio-label {
+      font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(201,168,76,0.6);
-      margin-bottom: 6px;
+      color: rgba(201,168,76,0.7);
+      margin-bottom: 8px;
     }
-
-    .info-tile .tile-value {
+    .trio-symbol { font-size: 2.4rem; color: var(--gold-light); }
+    .trio-name {
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
+      font-size: 1.3rem;
       color: var(--gold-light);
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+    .trio-eng {
+      font-size: 0.88rem;
+      color: rgba(232,220,200,0.75);
+      font-style: italic;
+      margin-top: 2px;
+    }
+    .trio-deg {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+    .trio-nak {
+      font-size: 0.85rem;
+      color: rgba(232,220,200,0.7);
+      margin-top: 4px;
+    }
+    .trio-sub {
+      font-size: 0.78rem;
+      color: rgba(201,168,76,0.55);
+      font-style: italic;
+      margin-top: 10px;
     }
 
-    .predictions-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
+    /* ── Section titles ── */
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      text-align: center;
+      letter-spacing: 0.12em;
+      margin: 40px 0 16px;
+    }
+    .section-note {
+      text-align: center;
+      font-style: italic;
+      color: rgba(232,220,200,0.65);
+      font-size: 0.95rem;
+      max-width: 720px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
     }
 
-    .pred-card {
+    /* ── Planetary table ── */
+    .table-wrap {
+      overflow-x: auto;
       background: linear-gradient(135deg, rgba(26,13,53,0.9), rgba(13,6,32,0.95));
       border: 1px solid rgba(201,168,76,0.2);
       border-radius: 14px;
-      padding: 24px;
+      padding: 8px;
+    }
+    .planet-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .planet-table th, .planet-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .planet-table th {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .planet-table tbody tr:hover { background: rgba(201,168,76,0.06); }
+    .planet-table td.good { color: var(--good); font-style: italic; }
+    .planet-table td.bad  { color: var(--bad);  font-style: italic; }
+
+    /* ── House cards ── */
+    .house-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .house-card {
+      background: linear-gradient(135deg, rgba(26,13,53,0.9), rgba(13,6,32,0.95));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      padding: 20px;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
-
-    .pred-card:hover {
-      border-color: rgba(201,168,76,0.5);
+    .house-card:hover {
+      border-color: rgba(201,168,76,0.45);
       box-shadow: 0 0 30px rgba(201,168,76,0.1);
     }
-
-    .pred-card .pred-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
-
-    .pred-card h3 {
+    .house-num {
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
+      font-size: 2rem;
+      color: var(--gold-light);
+      line-height: 1;
     }
-
-    .pred-card p {
-      font-size: 1rem;
-      line-height: 1.85;
-      color: rgba(232,220,200,0.85);
-    }
-
-    .lucky-section {
-      margin-top: 30px;
-      background: linear-gradient(135deg, rgba(123,45,139,0.2), rgba(201,168,76,0.08));
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 14px;
-      padding: 28px;
-    }
-
-    .lucky-section h3 {
-      font-family: 'Cinzel', serif;
-      color: var(--gold);
-      font-size: 1.1rem;
-      letter-spacing: 0.12em;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .lucky-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 14px;
-    }
-
-    .lucky-item {
-      text-align: center;
-      padding: 14px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 10px;
-      border: 1px solid rgba(201,168,76,0.15);
-    }
-
-    .lucky-item .lucky-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    .house-num .ord {
+      font-size: 0.9rem;
       color: rgba(201,168,76,0.6);
-      display: block;
+      vertical-align: super;
+      margin-left: 2px;
+    }
+    .house-theme {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 8px 0 10px;
+    }
+    .house-meta {
+      font-size: 0.85rem;
+      color: rgba(232,220,200,0.7);
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+    .house-reading {
+      font-size: 0.96rem;
+      line-height: 1.7;
+      color: rgba(232,220,200,0.88);
+    }
+
+    /* ── Doshas ── */
+    .dosha-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .dosha-card {
+      background: linear-gradient(135deg, rgba(40,15,30,0.9), rgba(20,10,25,0.95));
+      border: 1px solid rgba(255,123,123,0.3);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .dosha-card.sev-strong { border-color: rgba(255,123,123,0.6); box-shadow: 0 0 30px rgba(255,123,123,0.12); }
+    .dosha-card.sev-mod    { border-color: rgba(255,170,80,0.5); }
+    .dosha-card.sev-mild   { border-color: rgba(201,168,76,0.4); }
+    .dosha-title {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-light);
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
       margin-bottom: 6px;
     }
-
-    .lucky-item .lucky-val {
-      font-family: 'Cinzel', serif;
-      font-size: 1.1rem;
-      color: var(--gold-light);
-    }
-
-    .mantra-box {
-      margin-top: 28px;
-      text-align: center;
-      padding: 24px;
-      border-top: 1px solid rgba(201,168,76,0.2);
-    }
-
-    .mantra-box .mantra-label {
-      font-size: 0.8rem;
-      letter-spacing: 0.25em;
+    .dosha-sev {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(201,168,76,0.6);
+      color: rgba(255,180,180,0.85);
+      background: rgba(255,123,123,0.12);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+    .dosha-desc {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(232,220,200,0.88);
+    }
+
+    /* ── Remedies ── */
+    .remedy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .remedy-card {
+      background: linear-gradient(135deg, rgba(123,45,139,0.18), rgba(201,168,76,0.06));
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 12px;
+      padding: 22px;
+    }
+    .remedy-title {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+    .remedy-list {
+      list-style: none;
+      padding: 0;
+    }
+    .remedy-list li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 10px;
+      font-size: 0.94rem;
+      line-height: 1.65;
+      color: rgba(232,220,200,0.88);
+    }
+    .remedy-list li::before {
+      content: '✦';
+      color: var(--gold);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 0.8rem;
+    }
+
+    /* ── Universal practices ── */
+    .universal-block {
+      background: linear-gradient(135deg, rgba(26,13,53,0.85), rgba(13,6,32,0.95));
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 14px;
+      padding: 24px 28px;
+    }
+    .universal-list {
+      list-style: none;
+      padding: 0;
+    }
+    .universal-list li {
+      position: relative;
+      padding-left: 22px;
       margin-bottom: 12px;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(232,220,200,0.9);
+    }
+    .universal-list li::before {
+      content: '✦';
+      color: var(--gold);
+      position: absolute;
+      left: 0; top: 2px;
     }
 
-    .mantra-box .mantra-text {
-      font-size: 1.3rem;
-      color: var(--gold-light);
-      font-style: italic;
-      letter-spacing: 0.05em;
-      text-shadow: 0 0 20px rgba(201,168,76,0.4);
-    }
-
+    /* ── Reset / disclaimer ── */
     .reset-btn {
       display: block;
-      margin: 40px auto 0;
+      margin: 40px auto 24px;
       padding: 12px 36px;
       background: transparent;
       border: 1px solid rgba(201,168,76,0.4);
       border-radius: 8px;
-      color: rgba(201,168,76,0.8);
+      color: rgba(201,168,76,0.85);
       font-family: 'Cinzel', serif;
       font-size: 0.85rem;
       letter-spacing: 0.15em;
       cursor: pointer;
       transition: all 0.3s;
     }
-
     .reset-btn:hover {
       background: rgba(201,168,76,0.1);
       border-color: var(--gold);
       color: var(--gold-light);
+    }
+    .disclaimer {
+      max-width: 720px;
+      margin: 24px auto 0;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(232,220,200,0.45);
+      font-style: italic;
+      line-height: 1.7;
     }
 
     /* ── Footer ── */
@@ -398,9 +495,10 @@
     }
 
     @media (max-width: 600px) {
-      .card { padding: 28px 20px; }
+      .card { padding: 26px 18px; }
       .form-row { grid-template-columns: 1fr; }
-      .predictions-grid { grid-template-columns: 1fr; }
+      .planet-table th, .planet-table td { padding: 10px 8px; font-size: 0.85rem; }
+      .trio-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -415,21 +513,22 @@
     <span>The Divine Light of Indian Astrology</span>
   </h1>
   <div class="divider"></div>
-  <p>Discover the ancient wisdom of Vedic astrology. Enter your birth details and receive personalised predictions guided by the planets, your Rashi, and your Nakshatra.</p>
+  <p>Your chart is computed from the actual positions of the planets at the moment and place of your birth — using your latitude, longitude and local time, with the Lahiri ayanamsa applied for true sidereal accuracy.</p>
 </section>
 
 <!-- Form -->
 <section class="form-section">
   <div class="card">
     <h2>✦ Enter Your Birth Details ✦</h2>
-    <form id="astro-form">
+    <form id="astro-form" autocomplete="off">
       <div class="form-group">
         <label>Your Name</label>
         <input type="text" id="name" placeholder="Enter your full name" required />
       </div>
       <div class="form-group">
-        <label>Place of Birth</label>
-        <input type="text" id="pob" placeholder="e.g. Mumbai, Maharashtra" required />
+        <label>Place of Birth <span class="hint">(start typing — pick from the list)</span></label>
+        <input type="text" id="pob" list="city-list" placeholder="e.g. Mumbai, Varanasi, London" required />
+        <datalist id="city-list"></datalist>
       </div>
       <div class="form-row">
         <div class="form-group">
@@ -437,9 +536,9 @@
           <input type="date" id="dob" required />
         </div>
         <div class="form-group">
-          <label>Time of Birth</label>
+          <label>Time of Birth <span class="hint">(as accurate as possible)</span></label>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <select id="tob-hour">
+            <select id="tob-hour" required>
               <option value="">Hour</option>
               <option>12 AM</option><option>1 AM</option><option>2 AM</option>
               <option>3 AM</option><option>4 AM</option><option>5 AM</option>
@@ -450,7 +549,7 @@
               <option>6 PM</option><option>7 PM</option><option>8 PM</option>
               <option>9 PM</option><option>10 PM</option><option>11 PM</option>
             </select>
-            <select id="tob-min">
+            <select id="tob-min" required>
               <option value="">Min</option>
               <option>00</option><option>05</option><option>10</option>
               <option>15</option><option>20</option><option>25</option>
@@ -491,7 +590,7 @@
 
 <footer>
   ✦ &nbsp; Jyotish — Vedic Astrology for the Modern Soul &nbsp; ✦ <br/>
-  <span style="font-size:0.75rem; opacity:0.6;">For entertainment and spiritual reflection. Consult a qualified Jyotishi for major life decisions.</span>
+  <span style="font-size:0.75rem; opacity:0.6;">Computed from sidereal planetary positions (Lahiri ayanamsa). Consult a qualified Jyotishi for major life decisions.</span>
 </footer>
 
 <script>
@@ -500,13 +599,11 @@
   const canvas = document.getElementById('stars-canvas');
   const ctx = canvas.getContext('2d');
   let stars = [];
-
   function resize() {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
     initStars();
   }
-
   function initStars() {
     stars = [];
     for (let i = 0; i < 220; i++) {
@@ -520,7 +617,6 @@
       });
     }
   }
-
   function draw(t) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     stars.forEach(s => {
@@ -532,328 +628,16 @@
     });
     requestAnimationFrame(draw);
   }
-
   window.addEventListener('resize', resize);
   resize();
   requestAnimationFrame(draw);
 })();
-
-// ── Astrology data ──
-const RASHIS = [
-  {
-    name: 'Mesha', english: 'Aries', symbol: '♈', lord: 'Mangal (Mars)',
-    element: 'Agni (Fire)', quality: 'Chara (Cardinal)', dates: 'Apr 14 – May 14',
-    general: 'You are ruled by Mangal, the warrior planet, giving you fierce courage, unstoppable drive, and a pioneering spirit. You are a natural leader who thrives on new beginnings. Your energy is boundless, but learning patience will be your greatest achievement. The cosmos currently favours bold decisions — trust your instincts and step forward without hesitation. Old obstacles that seemed immovable are beginning to dissolve, clearing a bright path ahead.',
-    career: 'The stars align powerfully for your professional ambitions. A long-awaited recognition or promotion is moving closer. Jupiter\'s benevolent gaze supports new ventures — if you have been contemplating starting something of your own, the time is auspicious. Guard against impulsive financial decisions, and avoid confrontations with superiors, as Mars can make you speak before thinking.',
-    love: 'In matters of the heart, passion runs deep for Mesha natives. Single individuals may encounter someone unexpectedly through social or professional circles — remain open. Those in relationships should soften their directness; your partner needs tenderness, not just action. A small romantic gesture now will strengthen your bond considerably.',
-    health: 'Your natural vitality is your greatest blessing. However, Mangal\'s influence may bring stress-related headaches or neck tension. Regular morning exercise — particularly yoga or brisk walks — will keep your energy balanced. Avoid spicy and overly heating foods. Adequate sleep is essential; do not sacrifice rest for ambition.',
-    lucky: { number: '9', color: 'Coral Red', day: 'Mangalwar (Tuesday)', gem: 'Red Coral (Moonga)', god: 'Lord Hanuman', mantra: 'Om Angarakaya Namaha' }
-  },
-  {
-    name: 'Vrishabha', english: 'Taurus', symbol: '♉', lord: 'Shukra (Venus)',
-    element: 'Prithvi (Earth)', quality: 'Sthira (Fixed)', dates: 'May 15 – Jun 14',
-    general: 'Blessed by Shukra, the planet of beauty and abundance, you carry a natural magnetism and an appreciation for life\'s finer pleasures. You are deeply dependable, patient, and grounded — people seek you as their anchor in turbulent times. The current period brings a steady flow of prosperity, though it rewards consistency over shortcuts. Trust the slow, sure process — your seeds are taking root.',
-    career: 'Financial matters look encouraging. A raise, bonus, or profitable opportunity could emerge from a trusted source. Vrishabha natives excel in fields requiring patience and creativity — arts, finance, food, or luxury industries. Avoid stubbornness in professional negotiations; flexibility now will serve you better than holding firm.',
-    love: 'Shukra graces your relationships with warmth and sensuality. For singles, a deeply compatible soul may be closer than you realise — perhaps someone already in your circle. For couples, this is a beautiful time to deepen commitment, plan a special outing, or simply express the love that sometimes goes unspoken in daily routine.',
-    health: 'Pay attention to your throat and neck — these are Vrishabha\'s sensitive zones. Thyroid health may need monitoring. Avoid rich, heavy foods in excess; your love for good meals is your joy but also your caution. Gentle outdoor activities and time spent in nature will restore and nourish you deeply.',
-    lucky: { number: '6', color: 'Soft White & Pink', day: 'Shukravar (Friday)', gem: 'Diamond or White Sapphire', god: 'Goddess Lakshmi', mantra: 'Om Shukraya Namaha' }
-  },
-  {
-    name: 'Mithuna', english: 'Gemini', symbol: '♊', lord: 'Budha (Mercury)',
-    element: 'Vayu (Air)', quality: 'Chara (Cardinal)', dates: 'Jun 15 – Jul 15',
-    general: 'Governed by Budha, the planet of intellect and communication, you are gifted with a quicksilver mind, natural wit, and extraordinary versatility. You see many sides of every situation — a gift that makes you an exceptional communicator and advisor. The current cosmic climate strongly activates your mental faculties. Ideas that have been scattered are beginning to crystallise into something meaningful and actionable.',
-    career: 'Mercury favours your professional life with sharp mental clarity. Writing, teaching, media, technology, and commerce are all highlighted. A conversation or meeting in the near future could open a significant door — prepare well and speak with confidence. Multiple income streams may develop simultaneously; manage your time and energy wisely.',
-    love: 'You need mental stimulation to feel truly connected. A relationship lacking intellectual depth will feel stifling. Fortunately, the current period brings meaningful conversations that deepen bonds. Singles may meet someone through learning, travel, or digital connections. In existing relationships, plan activities that you can explore together.',
-    health: 'Your nervous system is your most sensitive area — anxiety and overthinking can manifest physically as restlessness, insomnia, or shallow breathing. Daily meditation, even for ten minutes, will have a profound effect. Pranayama (breathing exercises) is particularly beneficial for Mithuna natives. Protect your lungs and hands.',
-    lucky: { number: '5', color: 'Emerald Green', day: 'Budhavar (Wednesday)', gem: 'Emerald (Panna)', god: 'Lord Vishnu', mantra: 'Om Budhaya Namaha' }
-  },
-  {
-    name: 'Karka', english: 'Cancer', symbol: '♋', lord: 'Chandra (Moon)',
-    element: 'Jala (Water)', quality: 'Chara (Cardinal)', dates: 'Jul 16 – Aug 16',
-    general: 'Ruled by the Chandra, the Moon itself, you are blessed with profound emotional intelligence, powerful intuition, and a nurturing heart that few can match. Your moods ebb and flow like the tides — this is not weakness but the depth of your feeling nature. The current period calls you to honour your emotional world while building something lasting in the material one. Your home and family are your sacred ground.',
-    career: 'Opportunities connected to nurturing, healing, food, home, or real estate are particularly favoured. Your intuitive understanding of people makes you exceptional in roles requiring empathy — teaching, counselling, healthcare, hospitality. A domestic or property-related matter may bring unexpected financial benefit. Trust your gut feelings in professional decisions.',
-    love: 'You love with your entire being, and you deserve the same in return. The current period illuminates which relationships are truly reciprocal. For singles, an emotionally mature and stable partner is drawing near — someone who appreciates your depth. For couples, opening up about your deeper needs will transform your relationship into something even more beautiful.',
-    health: 'The chest, lungs, and stomach are your sensitive areas. Emotional stress tends to settle in your digestive system — notice the connection between your feelings and your physical wellbeing. Nourishing, home-cooked food, time near water, and monthly Moon-gazing are all healing practices for Karka natives.',
-    lucky: { number: '2', color: 'Pearlescent White', day: 'Somavar (Monday)', gem: 'Pearl (Moti)', god: 'Lord Shiva', mantra: 'Om Chandraya Namaha' }
-  },
-  {
-    name: 'Simha', english: 'Leo', symbol: '♌', lord: 'Surya (Sun)',
-    element: 'Agni (Fire)', quality: 'Sthira (Fixed)', dates: 'Aug 17 – Sep 16',
-    general: 'The Sun itself governs you, bestowing natural authority, radiant charisma, and an inborn sense of dignity that commands respect. You were born to shine and to lead — not from ego, but from genuine warmth and courage. The cosmos is currently amplifying your solar energy, calling you into positions of greater visibility. Step into the spotlight with grace; your time for recognition has arrived.',
-    career: 'Leadership opportunities are strongly favoured. Others look to you for direction — do not shrink from that role. Government, politics, arts, entertainment, management, and entrepreneurship are your natural domains. Beware of pride in negotiations; a moment of humility could seal a deal that stubbornness would lose. A senior figure may offer crucial guidance — receive it with gratitude.',
-    love: 'You are passionate, generous, and devoted in love. You need admiration, but also give it lavishly in return. The current period is deeply romantic — plan something grand, for Simha natives rarely do anything small. Singles are magnetically attractive right now; your confidence will draw admiring eyes. Couples should celebrate each other openly and joyfully.',
-    health: 'Your heart — both literally and metaphorically — is your most vital organ. Cardiovascular health deserves attention. Avoid excessive stress and learn to delegate rather than carry all burdens yourself. Sunlight, physical activity, and creative expression are all medicine for Simha natives. Protect your spine and upper back.',
-    lucky: { number: '1', color: 'Golden Yellow', day: 'Ravivaar (Sunday)', gem: 'Ruby (Manik)', god: 'Lord Surya (Sun God)', mantra: 'Om Suryaya Namaha' }
-  },
-  {
-    name: 'Kanya', english: 'Virgo', symbol: '♍', lord: 'Budha (Mercury)',
-    element: 'Prithvi (Earth)', quality: 'Dvishvabhava (Mutable)', dates: 'Sep 17 – Oct 16',
-    general: 'Budha blesses you with an exceptional analytical mind, a talent for perfection, and a quiet dedication to service that is truly remarkable. You notice what others miss and improve what others accept. The current period rewards your meticulous efforts with tangible results. Stop second-guessing your capabilities — the self-criticism that has held you back is beginning to lift, and the world is ready to see your brilliance.',
-    career: 'Your attention to detail and reliability make you indispensable in any workplace. Fields of medicine, research, writing, accounting, data science, and holistic health are powerfully supported. A project you have been refining is ready to be shared — release perfectionism and present your work. Financial organisation undertaken now will yield dividends for years to come.',
-    love: 'You show love through acts of service — you remember the small things, the preferences, the details that make your partner feel truly seen. The current period encourages you to also express love through words and physical affection, not just actions. Singles should resist the urge to analyse a potential partner into the ground — allow yourself to simply feel.',
-    health: 'The digestive system and intestines are Kanya\'s sensitive areas. A clean, plant-rich diet will transform how you feel within weeks. Stress manifests physically for you — yoga, journalling, and regular routines create a sense of safety that supports your wellbeing. Avoid excessive worry, which is your greatest health challenge.',
-    lucky: { number: '5', color: 'Forest Green', day: 'Budhavar (Wednesday)', gem: 'Emerald (Panna)', god: 'Goddess Saraswati', mantra: 'Om Budhaya Namaha' }
-  },
-  {
-    name: 'Tula', english: 'Libra', symbol: '♎', lord: 'Shukra (Venus)',
-    element: 'Vayu (Air)', quality: 'Chara (Cardinal)', dates: 'Oct 17 – Nov 15',
-    general: 'Shukra, the planet of harmony and beauty, rules your life with elegance. You possess a rare gift for seeing all perspectives, creating peace, and bringing beauty into everything you touch. You are the diplomat of the zodiac. The current period calls you to make a decision you have been weighing — the scales must tip. Your deep fairness will guide you to the right choice. Trust yourself.',
-    career: 'Partnerships and collaborations are strongly favoured. Two minds working in harmony will produce something neither could achieve alone. Law, diplomacy, interior design, fashion, art, and public relations are your natural vocations. Avoid procrastination in professional matters — your tendency to over-consider can cause you to miss windows of opportunity.',
-    love: 'Love is your element — you were made for deep, balanced partnership. The current period is perhaps the most romantically charged of the year. Singles should not overthink; if it feels right in your heart, it is right. Couples are being invited into a new level of depth and equality. Express your needs clearly — your partner cannot guess what you do not share.',
-    health: 'The kidneys and lower back are Tula\'s sensitive zones. Stay well hydrated and avoid excessive sugar and processed foods. Balance is the key to your health in all ways — neither over-exercising nor sedentary. Beautiful surroundings, harmonious music, and time in nature near water are deeply healing.',
-    lucky: { number: '6', color: 'Sky Blue & Pink', day: 'Shukravar (Friday)', gem: 'Diamond or Opal', god: 'Goddess Lakshmi', mantra: 'Om Shukraya Namaha' }
-  },
-  {
-    name: 'Vrishchika', english: 'Scorpio', symbol: '♏', lord: 'Mangal (Mars) & Ketu',
-    element: 'Jala (Water)', quality: 'Sthira (Fixed)', dates: 'Nov 16 – Dec 15',
-    general: 'Ruled by the intense energies of Mangal and Ketu, you are the most transformative, powerful, and deeply perceptive sign of the zodiac. You understand the hidden depths of people and situations that others cannot see. You have survived things that would have destroyed a less resilient soul. The current period is one of profound rebirth — something that no longer serves you is releasing, making space for something extraordinary to enter.',
-    career: 'Your investigative nature, intensity, and determination make you formidable in research, psychology, medicine, forensics, finance, and occult sciences. A powerful opportunity connected to your deepest skills may come through an unexpected source. Guard your professional secrets — not everyone around you holds your best interests. A strategic alliance formed now could be transformative.',
-    love: 'You love with a depth and loyalty that is rare in this world. However, trust is everything for Vrishchika — once broken, it is nearly impossible to rebuild. The current period demands honesty in close relationships. Old wounds from past relationships may surface for final healing. Singles may encounter someone who matches their intensity — this connection will feel destined.',
-    health: 'The reproductive system and elimination organs are Vrishchika\'s sensitive areas. Emotional suppression, which you are prone to, can manifest as chronic tension or immune challenges. Practices that allow emotional release — therapy, journalling, intense physical exercise, or transformative breathwork — are essential medicine for you.',
-    lucky: { number: '9', color: 'Deep Crimson', day: 'Mangalwar (Tuesday)', gem: 'Red Coral (Moonga)', god: 'Lord Shiva & Kali', mantra: 'Om Namah Shivaya' }
-  },
-  {
-    name: 'Dhanu', english: 'Sagittarius', symbol: '♐', lord: 'Guru (Jupiter)',
-    element: 'Agni (Fire)', quality: 'Dvishvabhava (Mutable)', dates: 'Dec 16 – Jan 13',
-    general: 'Blessed by Guru, Jupiter himself — the greatest benefic planet in Jyotish — you carry a natural optimism, philosophical wisdom, and a boundless thirst for truth and adventure. You are the seeker, the teacher, the explorer of both worlds and ideas. The current period is expansive and full of possibility. A door to a larger life is opening before you — walk through it with faith and your characteristic enthusiasm.',
-    career: 'Jupiter\'s expansive influence brings growth in all professional areas. Education, publishing, law, philosophy, travel, spirituality, and international matters are strongly highlighted. A teacher, mentor, or guide may appear who redirects your path in a profoundly positive direction. Financial growth comes from expanding your expertise and sharing it generously.',
-    love: 'You need freedom within love — a partner who is also a companion, a fellow adventurer in life. The current period brings meaningful romantic experiences, particularly connected to travel, learning, or cultural exploration. Singles may meet someone from a different background or city. In existing relationships, plan an adventure together — shared experiences are the language of your love.',
-    health: 'The hips, thighs, and liver are Dhanu\'s sensitive areas. Your exuberant energy can lead to overindulgence — in food, activity, or stimulation. Moderation, which does not come naturally to you, is the great gift you can give your body. Outdoor activities, especially running, hiking, or horse-riding, are deeply nourishing for your spirit and body.',
-    lucky: { number: '3', color: 'Royal Yellow', day: 'Guruvaar (Thursday)', gem: 'Yellow Sapphire (Pukhraj)', god: 'Lord Vishnu & Brahaspati', mantra: 'Om Guruve Namaha' }
-  },
-  {
-    name: 'Makara', english: 'Capricorn', symbol: '♑', lord: 'Shani (Saturn)',
-    element: 'Prithvi (Earth)', quality: 'Chara (Cardinal)', dates: 'Jan 14 – Feb 12',
-    general: 'Shani, the great teacher Saturn, governs your life with discipline, patience, and an unrelenting drive toward mastery. You understand that true success is built slowly, stone by stone, and you are willing to do the work that others are not. The current period is one of quiet but substantial progress — the efforts of years past are beginning to manifest into lasting structure. Shani rewards those who persevere, and you always do.',
-    career: 'Professional recognition is building steadily. Senior leadership, government, architecture, engineering, law, and long-term strategic roles are your natural strengths. A position of greater authority or responsibility may be offered — you are ready for it, even if doubt whispers otherwise. Financial discipline pursued now will create the security you have always worked toward.',
-    love: 'You are slow to open your heart, but once committed, your loyalty is absolute and unshakeable. The current period brings stability and depth to existing relationships. If there have been tensions, a calm, mature conversation will resolve more than years of silent resentment. Singles may connect with someone dependable, grounded, and serious — someone who matches your own steady energy.',
-    health: 'The bones, joints, skin, and teeth are Makara\'s sensitive areas. Shani\'s cold, dry energy can manifest as arthritis, dental issues, or skin conditions under stress. Warming practices — sesame oil massage, warm foods, gentle yoga — are highly beneficial. Do not neglect your knees, which are your most vulnerable joint.',
-    lucky: { number: '8', color: 'Midnight Blue & Black', day: 'Shanivaar (Saturday)', gem: 'Blue Sapphire (Neelam)', god: 'Lord Shani & Hanuman', mantra: 'Om Shanaischaraya Namaha' }
-  },
-  {
-    name: 'Kumbha', english: 'Aquarius', symbol: '♒', lord: 'Shani (Saturn) & Rahu',
-    element: 'Vayu (Air)', quality: 'Sthira (Fixed)', dates: 'Feb 13 – Mar 13',
-    general: 'Governed by both Shani and the shadowy, innovative Rahu, you are the most original and forward-thinking sign of the zodiac. You see the future before others have glimpsed it, and you feel a deep calling to serve humanity in some meaningful way. Your path is never conventional — and it was never meant to be. The current period is awakening your higher purpose; a cause or vision that could become your greatest contribution is calling your name.',
-    career: 'Technology, science, social reform, humanitarian work, aviation, and all fields concerned with the future are powerfully supported. Your unconventional ideas are your greatest professional asset — do not suppress them to fit a mould that was never made for you. A collaboration with someone equally innovative could yield something remarkable. Financial gains may come from unexpected or modern sources.',
-    love: 'You need intellectual freedom and emotional space within a relationship. The right partner will celebrate your uniqueness rather than trying to change it. The current period brings unexpected romantic encounters — perhaps through community, online spaces, or shared causes. In existing relationships, acknowledge that your partner also needs personal attention and warmth, not just ideas and adventures.',
-    health: 'The circulatory system, ankles, and calves are Kumbha\'s sensitive areas. Rahu\'s influence can create anxiety, erratic sleep, or nervous exhaustion. Regular grounding practices — walking barefoot on earth, eating warming meals, and consistent sleep schedules — are profoundly stabilising. Avoid excessive screen time and mental overstimulation.',
-    lucky: { number: '8', color: 'Electric Blue', day: 'Shanivaar (Saturday)', gem: 'Hessonite Garnet (Gomed)', god: 'Lord Saturn & Rahu', mantra: 'Om Rahave Namaha' }
-  },
-  {
-    name: 'Meena', english: 'Pisces', symbol: '♓', lord: 'Guru (Jupiter) & Ketu',
-    element: 'Jala (Water)', quality: 'Dvishvabhava (Mutable)', dates: 'Mar 14 – Apr 13',
-    general: 'The most spiritually evolved sign, governed by the boundless wisdom of Guru and the liberating Ketu, you are deeply intuitive, compassionate, and connected to realms beyond the ordinary. You are an old soul — you have been here before, and you carry that ancient knowing within you. The current period is one of spiritual deepening and creative flowering. Your dreams are not fantasies; they are visions of your possible life. Honour them.',
-    career: 'The arts, healing, spirituality, charitable work, oceanography, film, poetry, and any field requiring imagination and compassion are your natural domains. Your intuition in professional decisions is extraordinary — learn to trust it as data. A creative project may receive unexpected attention or support. Avoid impractical financial decisions; Ketu can create detachment from material reality.',
-    love: 'You love with such selfless depth that you sometimes lose yourself completely in another person. The current period reminds you that you cannot pour from an empty vessel — self-love must come first. For singles, a soulful, spiritually aware partner may appear in a dream before appearing in reality. Pay attention. For couples, shared meditation, music, or creative expression will deepen your bond profoundly.',
-    health: 'The feet and lymphatic system are Meena\'s sensitive areas. Your empathic nature means you can absorb the emotional energies of those around you, which can manifest as unexplained fatigue. Regular energy cleansing — sea salt baths, time in nature, meditation — is not optional for you, it is medicine. Protect your feet and sleep in a peaceful environment.',
-    lucky: { number: '3', color: 'Aquamarine & Violet', day: 'Guruvaar (Thursday)', gem: 'Yellow Sapphire (Pukhraj)', god: 'Lord Vishnu & Ganesha', mantra: 'Om Guruve Namaha' }
-  }
-];
-
-const NAKSHATRAS = [
-  'Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra',
-  'Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni',
-  'Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha',
-  'Mula','Purva Ashadha','Uttara Ashadha','Shravana','Dhanishtha',
-  'Shatabhisha','Purva Bhadrapada','Uttara Bhadrapada','Revati'
-];
-
-const NAKSHATRA_QUALITIES = [
-  'Swift & Healing','Active & Passionate','Nurturing & Fierce','Gentle & Prosperous',
-  'Searching & Curious','Stormy & Transformative','Renewing & Fortunate','Nourishing & Sacred',
-  'Entwining & Perceptive','Regal & Ancestral','Creative & Indulgent','Dedicated & Gracious',
-  'Skillful & Adaptable','Brilliant & Artistic','Independent & Moving','Fiery & Devoted',
-  'Friendly & Devoted','Senior & Powerful','Rooted & Transforming','Invincible & Searching',
-  'Victorious & Steady','Listening & Devoted','Swift & Wealthy','Hundred Physicians & Healing',
-  'Fierce & Transcending','Auspicious & Stable','Boundless & Completing'
-];
-
-function getVedicRashi(month, day) {
-  if ((month === 4 && day >= 14) || (month === 5 && day <= 14)) return 0;  // Mesha
-  if ((month === 5 && day >= 15) || (month === 6 && day <= 14)) return 1;  // Vrishabha
-  if ((month === 6 && day >= 15) || (month === 7 && day <= 15)) return 2;  // Mithuna
-  if ((month === 7 && day >= 16) || (month === 8 && day <= 16)) return 3;  // Karka
-  if ((month === 8 && day >= 17) || (month === 9 && day <= 16)) return 4;  // Simha
-  if ((month === 9 && day >= 17) || (month === 10 && day <= 16)) return 5; // Kanya
-  if ((month === 10 && day >= 17) || (month === 11 && day <= 15)) return 6;// Tula
-  if ((month === 11 && day >= 16) || (month === 12 && day <= 15)) return 7;// Vrishchika
-  if ((month === 12 && day >= 16) || (month === 1 && day <= 13)) return 8; // Dhanu
-  if ((month === 1 && day >= 14) || (month === 2 && day <= 12)) return 9;  // Makara
-  if ((month === 2 && day >= 13) || (month === 3 && day <= 13)) return 10; // Kumbha
-  return 11; // Meena
-}
-
-function getNakshatra(day, month, year) {
-  const seed = (day * 7 + month * 13 + year * 3) % 27;
-  return seed;
-}
-
-function getLifeStage(year) {
-  const age = new Date().getFullYear() - year;
-  if (age < 18)  return { stage: 'Vidya (Learning)', desc: 'A time of growth, discovery, and laying the foundations of your destiny.' };
-  if (age < 35)  return { stage: 'Artha (Seeking)', desc: 'A time of building, striving, and discovering your unique place in the world.' };
-  if (age < 60)  return { stage: 'Dharma (Fulfilling)', desc: 'A time of purpose, mastery, and contributing your gifts to the world.' };
-  return         { stage: 'Moksha (Transcending)', desc: 'A time of wisdom, inner peace, and preparing to pass your light to others.' };
-}
-
-document.getElementById('astro-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const name    = document.getElementById('name').value.trim();
-  const pob     = document.getElementById('pob').value.trim();
-  const dobVal  = document.getElementById('dob').value;
-  const tobHour = document.getElementById('tob-hour').value;
-  const tobMin  = document.getElementById('tob-min').value;
-  const tobVal  = tobHour ? `${tobHour}${tobMin ? ':' + tobMin : ''}` : '';
-  const concern = document.getElementById('concern').value;
-
-  if (!dobVal) return;
-
-  const dob   = new Date(dobVal);
-  const month = dob.getMonth() + 1;
-  const day   = dob.getDate();
-  const year  = dob.getFullYear();
-
-  const rashiIdx = getVedicRashi(month, day);
-  const rashi    = RASHIS[rashiIdx];
-  const nakIdx   = getNakshatra(day, month, year);
-  const nakshatra = NAKSHATRAS[nakIdx];
-  const nakQuality = NAKSHATRA_QUALITIES[nakIdx];
-  const lifeStage = getLifeStage(year);
-
-  const primaryPred = concern === 'career'   ? rashi.career
-                    : concern === 'love'      ? rashi.love
-                    : concern === 'health'    ? rashi.health
-                    : rashi.general;
-
-  const primaryTitle = concern === 'career'   ? 'Career & Wealth'
-                     : concern === 'love'      ? 'Love & Relationships'
-                     : concern === 'health'    ? 'Health & Wellbeing'
-                     : 'General Reading';
-
-  const primaryIcon = concern === 'career' ? '💼' : concern === 'love' ? '❤️' : concern === 'health' ? '🌿' : '🔮';
-
-  const timeNote = tobVal ? `Born at ${tobVal}` : 'Time of birth not provided';
-  const placeNote = pob ? pob : 'Place not specified';
-
-  const resultsEl = document.getElementById('results');
-  resultsEl.style.display = 'block';
-  resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-  resultsEl.innerHTML = `
-    <div class="result-header">
-      <div class="greeting">Namaste, ${name} 🙏</div>
-      <p style="margin-top:10px; color:rgba(232,220,200,0.6); font-style:italic; font-size:0.95rem;">
-        Born ${dob.toLocaleDateString('en-IN', {day:'numeric', month:'long', year:'numeric'})} &nbsp;·&nbsp; ${timeNote} &nbsp;·&nbsp; ${placeNote}
-      </p>
-      <div class="rashi-badge">
-        <span class="symbol">${rashi.symbol}</span>
-        <span class="rashi-name">${rashi.name} &nbsp;·&nbsp; ${rashi.english}</span>
-        <span class="rashi-sub">Ruled by ${rashi.lord}</span>
-      </div>
-    </div>
-
-    <div class="info-grid">
-      <div class="info-tile">
-        <div class="tile-label">Place of Birth</div>
-        <div class="tile-value">${placeNote}</div>
-      </div>
-      <div class="info-tile">
-        <div class="tile-label">Rashi</div>
-        <div class="tile-value">${rashi.name}</div>
-      </div>
-      <div class="info-tile">
-        <div class="tile-label">Nakshatra</div>
-        <div class="tile-value">${nakshatra}</div>
-      </div>
-      <div class="info-tile">
-        <div class="tile-label">Element</div>
-        <div class="tile-value">${rashi.element}</div>
-      </div>
-      <div class="info-tile">
-        <div class="tile-label">Planetary Lord</div>
-        <div class="tile-value">${rashi.lord}</div>
-      </div>
-      <div class="info-tile">
-        <div class="tile-label">Life Stage</div>
-        <div class="tile-value">${lifeStage.stage}</div>
-      </div>
-      <div class="info-tile">
-        <div class="tile-label">Nakshatra Quality</div>
-        <div class="tile-value">${nakQuality}</div>
-      </div>
-    </div>
-
-    <p style="text-align:center; font-style:italic; color:rgba(232,220,200,0.55); font-size:0.9rem; margin-bottom:8px;">
-      ${lifeStage.desc}
-    </p>
-
-    <div class="predictions-grid">
-      <div class="pred-card">
-        <span class="pred-icon">${primaryIcon}</span>
-        <h3>✦ ${primaryTitle}</h3>
-        <p>${primaryPred}</p>
-      </div>
-      <div class="pred-card">
-        <span class="pred-icon">🌠</span>
-        <h3>✦ Nakshatra Reading — ${nakshatra}</h3>
-        <p>Your birth Nakshatra, ${nakshatra}, carries the energy of <em>${nakQuality.toLowerCase()}</em>. This Nakshatra shapes the very texture of your soul — the unconscious patterns, hidden gifts, and the spiritual themes that recur throughout your lifetime. In your current phase, ${nakshatra} is asking you to embody its highest qualities: to move beyond the familiar and step into the expanded version of yourself that the cosmos has always seen in you.</p>
-      </div>
-      <div class="pred-card">
-        <span class="pred-icon">⚡</span>
-        <h3>✦ Karma & Life Path</h3>
-        <p>${rashi.general}</p>
-      </div>
-      <div class="pred-card">
-        <span class="pred-icon">🌸</span>
-        <h3>✦ Spiritual Guidance</h3>
-        <p>Your ruling deity is <strong>${rashi.lucky.god}</strong>. Regular prayer or meditation with this divine energy will bring you alignment, clarity, and protection. Chanting your Beej Mantra — <em>${rashi.lucky.mantra}</em> — 108 times each ${rashi.lucky.day} is a powerful Vedic practice that harmonises your planetary energy and invites blessings into all areas of your life.${tobVal ? ` Your birth time and place of birth (${placeNote}) are used to determine your Lagna (Ascendant) — the rising sign at the moment of your arrival into this world, which shapes your outward personality and physical nature.` : ` For a complete Lagna (Ascendant) reading — which reveals your rising sign and shapes the full picture of your chart — a qualified Jyotishi can use your exact time and coordinates of birth in ${placeNote}.`}</p>
-      </div>
-    </div>
-
-    <div class="lucky-section">
-      <h3>✦ Your Vedic Auspicious Factors ✦</h3>
-      <div class="lucky-grid">
-        <div class="lucky-item">
-          <span class="lucky-label">Lucky Number</span>
-          <span class="lucky-val">${rashi.lucky.number}</span>
-        </div>
-        <div class="lucky-item">
-          <span class="lucky-label">Lucky Color</span>
-          <span class="lucky-val">${rashi.lucky.color}</span>
-        </div>
-        <div class="lucky-item">
-          <span class="lucky-label">Auspicious Day</span>
-          <span class="lucky-val">${rashi.lucky.day}</span>
-        </div>
-        <div class="lucky-item">
-          <span class="lucky-label">Gemstone</span>
-          <span class="lucky-val">${rashi.lucky.gem}</span>
-        </div>
-        <div class="lucky-item">
-          <span class="lucky-label">Ruling Deity</span>
-          <span class="lucky-val">${rashi.lucky.god}</span>
-        </div>
-        <div class="lucky-item">
-          <span class="lucky-label">Quality</span>
-          <span class="lucky-val">${rashi.quality}</span>
-        </div>
-      </div>
-      <div class="mantra-box">
-        <div class="mantra-label">Your Planetary Mantra</div>
-        <div class="mantra-text">${rashi.lucky.mantra}</div>
-      </div>
-    </div>
-
-    <button class="reset-btn" onclick="resetForm()">✦ New Reading ✦</button>
-  `;
-});
-
-function resetForm() {
-  document.getElementById('results').style.display = 'none';
-  document.getElementById('astro-form').reset();
-  document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
-}
 </script>
+
+<!-- Engine: load order matters (cities → astro → interpret → app) -->
+<script src="cities.js"></script>
+<script src="astro.js"></script>
+<script src="interpret.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

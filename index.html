@@ -427,6 +427,10 @@
         <label>Your Name</label>
         <input type="text" id="name" placeholder="Enter your full name" required />
       </div>
+      <div class="form-group">
+        <label>Place of Birth</label>
+        <input type="text" id="pob" placeholder="e.g. Mumbai, Maharashtra" required />
+      </div>
       <div class="form-row">
         <div class="form-group">
           <label>Date of Birth</label>
@@ -696,6 +700,7 @@ document.getElementById('astro-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
   const name    = document.getElementById('name').value.trim();
+  const pob     = document.getElementById('pob').value.trim();
   const dobVal  = document.getElementById('dob').value;
   const tobHour = document.getElementById('tob-hour').value;
   const tobMin  = document.getElementById('tob-min').value;
@@ -729,6 +734,7 @@ document.getElementById('astro-form').addEventListener('submit', function(e) {
   const primaryIcon = concern === 'career' ? '💼' : concern === 'love' ? '❤️' : concern === 'health' ? '🌿' : '🔮';
 
   const timeNote = tobVal ? `Born at ${tobVal}` : 'Time of birth not provided';
+  const placeNote = pob ? pob : 'Place not specified';
 
   const resultsEl = document.getElementById('results');
   resultsEl.style.display = 'block';
@@ -738,7 +744,7 @@ document.getElementById('astro-form').addEventListener('submit', function(e) {
     <div class="result-header">
       <div class="greeting">Namaste, ${name} 🙏</div>
       <p style="margin-top:10px; color:rgba(232,220,200,0.6); font-style:italic; font-size:0.95rem;">
-        Born ${dob.toLocaleDateString('en-IN', {day:'numeric', month:'long', year:'numeric'})} &nbsp;·&nbsp; ${timeNote}
+        Born ${dob.toLocaleDateString('en-IN', {day:'numeric', month:'long', year:'numeric'})} &nbsp;·&nbsp; ${timeNote} &nbsp;·&nbsp; ${placeNote}
       </p>
       <div class="rashi-badge">
         <span class="symbol">${rashi.symbol}</span>
@@ -748,6 +754,10 @@ document.getElementById('astro-form').addEventListener('submit', function(e) {
     </div>
 
     <div class="info-grid">
+      <div class="info-tile">
+        <div class="tile-label">Place of Birth</div>
+        <div class="tile-value">${placeNote}</div>
+      </div>
       <div class="info-tile">
         <div class="tile-label">Rashi</div>
         <div class="tile-value">${rashi.name}</div>
@@ -797,7 +807,7 @@ document.getElementById('astro-form').addEventListener('submit', function(e) {
       <div class="pred-card">
         <span class="pred-icon">🌸</span>
         <h3>✦ Spiritual Guidance</h3>
-        <p>Your ruling deity is <strong>${rashi.lucky.god}</strong>. Regular prayer or meditation with this divine energy will bring you alignment, clarity, and protection. Chanting your Beej Mantra — <em>${rashi.lucky.mantra}</em> — 108 times each ${rashi.lucky.day} is a powerful Vedic practice that harmonises your planetary energy and invites blessings into all areas of your life.</p>
+        <p>Your ruling deity is <strong>${rashi.lucky.god}</strong>. Regular prayer or meditation with this divine energy will bring you alignment, clarity, and protection. Chanting your Beej Mantra — <em>${rashi.lucky.mantra}</em> — 108 times each ${rashi.lucky.day} is a powerful Vedic practice that harmonises your planetary energy and invites blessings into all areas of your life.${tobVal ? ` Your birth time and place of birth (${placeNote}) are used to determine your Lagna (Ascendant) — the rising sign at the moment of your arrival into this world, which shapes your outward personality and physical nature.` : ` For a complete Lagna (Ascendant) reading — which reveals your rising sign and shapes the full picture of your chart — a qualified Jyotishi can use your exact time and coordinates of birth in ${placeNote}.`}</p>
       </div>
     </div>
 

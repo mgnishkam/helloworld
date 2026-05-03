@@ -78,6 +78,61 @@
     const moonDecoded  = window.Interpret.decodeLongitude(sidereal.Moon);
     const sunDecoded   = window.Interpret.decodeLongitude(sidereal.Sun);
 
+    // ── KUNDALI MILAN — handle before heavy computations ──
+    if (readingType === 'milan') {
+      const p2Name   = document.getElementById('p2-name').value.trim();
+      const p2PobRaw = document.getElementById('p2-pob').value.trim();
+      const p2DobVal = document.getElementById('p2-dob').value;
+      const p2Hour   = document.getElementById('p2-tob-hour').value;
+      const p2Min    = document.getElementById('p2-tob-min').value;
+
+      if (!p2Name || !p2PobRaw || !p2DobVal || p2Hour === '' || p2Min === '') {
+        alert('Please fill in all of your partner\'s birth details for Kundali Milan compatibility.');
+        return;
+      }
+      const p2City = findCity(p2PobRaw);
+      if (!p2City) {
+        alert(`Couldn't find "${p2PobRaw}" in the city list. Please choose a city from the suggestions.`);
+        return;
+      }
+      const p2HourMatch = p2Hour.match(/(\d+)\s*(AM|PM)/i);
+      if (!p2HourMatch) { alert('Please select a valid hour for your partner.'); return; }
+      let p2H = parseInt(p2HourMatch[1], 10);
+      const p2AP = p2HourMatch[2].toUpperCase();
+      if (p2AP === 'AM' && p2H === 12) p2H = 0;
+      else if (p2AP === 'PM' && p2H !== 12) p2H += 12;
+      const p2M = parseInt(p2Min, 10);
+      const [p2y, p2mo, p2d] = p2DobVal.split('-').map(Number);
+
+      const chart2       = window.Astro.computeChart(p2y, p2mo, p2d, p2H, p2M, p2City.lat, p2City.lon, p2City.tz);
+      const p2Moon       = window.Interpret.decodeLongitude(chart2.sidereal.Moon);
+      const p2Lagna      = window.Interpret.decodeLongitude(chart2.sidereal.Lagna);
+
+      const groomNak  = window.KundaliMilan.computeNakshatra(moonDecoded.signIdx, moonDecoded.degInSign);
+      const brideNak  = window.KundaliMilan.computeNakshatra(p2Moon.signIdx, p2Moon.degInSign);
+      const koot      = window.KundaliMilan.computeKoot(groomNak, moonDecoded.signIdx, brideNak, p2Moon.signIdx);
+
+      const p1Info    = { rashiIdx: moonDecoded.signIdx, lagnaIdx: lagnaSignIdx };
+      const p2Info    = { rashiIdx: p2Moon.signIdx,      lagnaIdx: p2Lagna.signIdx };
+      const milanHtml = window.KundaliMilan.renderMilanHTML(name, p1Info, p2Name, p2Info, koot);
+
+      const r = document.getElementById('results');
+      r.style.display = 'block';
+      r.innerHTML = `
+        <div class="result-header">
+          <div class="greeting">Kundali Milan ♥</div>
+          <p class="birth-line">Vedic Marriage Compatibility — Ashta Koot (36-point) Analysis</p>
+        </div>
+        ${milanHtml}
+        <h3 class="section-title">✦ Beyond Ashta Koot ✦</h3>
+        <p class="section-note" style="margin-bottom:24px">Ashta Koot gives the first and most widely-used compatibility picture. A complete Kundali Milan by a qualified Jyotishi also examines: Mangal Dosha cross-matching between both charts, the 7th-house lord and Venus/Mars placement in each chart, Navamsha D9 chart comparison, and Dasha/antardasha overlap timing. Astrology is a guide — the heart and conscious commitment are what sustain a marriage.</p>
+        <button class="reset-btn" onclick="document.getElementById('results').style.display='none';document.getElementById('astro-form').reset();document.getElementById('partner-section').style.display='none';document.getElementById('submit-btn').textContent='Reveal My Destiny ✦';document.querySelector('.form-section').scrollIntoView({behavior:'smooth'});">✦ New Reading ✦</button>
+        <p class="disclaimer">Compatibility computed from sidereal Moon sign and Nakshatra of each person (Lahiri ayanamsa). Ashta Koot scoring follows the classical BPHS tradition.</p>
+      `;
+      r.scrollIntoView({ behavior:'smooth', block:'start' });
+      return;
+    }
+
     const positions    = window.Interpret.buildPositions(sidereal, lagnaSignIdx, sidereal.Sun);
 
     // Retrograde detection — compare longitude at jd vs jd+1

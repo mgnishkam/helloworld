@@ -1347,6 +1347,169 @@
     .ss-dates { flex: 1; color: rgba(232,220,200,0.75); font-style: italic; }
     .ss-dur   { font-size: 0.82rem; color: rgba(201,168,76,0.55); }
 
+    /* ── Kundali Milan ── */
+    .milan-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      background: linear-gradient(135deg, rgba(123,45,139,0.2), rgba(201,168,76,0.08));
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin: 24px 0;
+    }
+    .milan-person {
+      text-align: center;
+      flex: 1;
+      min-width: 160px;
+    }
+    .milan-role {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.6);
+      margin-bottom: 8px;
+    }
+    .milan-person-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+    .milan-person-sign {
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .milan-person-nak {
+      font-size: 0.92rem;
+      color: rgba(232,220,200,0.8);
+      font-style: italic;
+    }
+    .milan-person-lagna {
+      font-size: 0.8rem;
+      color: rgba(201,168,76,0.55);
+      margin-top: 4px;
+    }
+    .milan-heart {
+      font-size: 2.8rem;
+      color: #ff7b9a;
+      text-shadow: 0 0 24px rgba(255,123,154,0.6);
+      flex-shrink: 0;
+      animation: glow 3s ease-in-out infinite;
+    }
+    .milan-score-wrap {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(26,13,53,0.95), rgba(13,6,32,0.98));
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 16px;
+      padding: 32px 28px;
+      margin: 0 0 28px;
+    }
+    .milan-score-num {
+      font-family: 'Cinzel', serif;
+      font-size: 4rem;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .milan-score-denom {
+      font-size: 1.8rem;
+      opacity: 0.6;
+    }
+    .milan-gauge-bg {
+      position: relative;
+      height: 14px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 100px;
+      max-width: 500px;
+      margin: 0 auto 20px;
+      overflow: visible;
+    }
+    .milan-gauge-fill {
+      height: 100%;
+      border-radius: 100px;
+      transition: width 1s ease;
+    }
+    .milan-gauge-markers {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      height: 0;
+    }
+    .milan-gauge-markers span {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      color: rgba(201,168,76,0.5);
+    }
+    .milan-verdict-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      margin-top: 28px;
+    }
+    .milan-verdict-text {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(232,220,200,0.85);
+    }
+    /* Verdict colour classes */
+    .milan-excellent { color: #7fdb96; }
+    .milan-good      { color: #f0d080; }
+    .milan-average   { color: #ffaa55; }
+    .milan-poor      { color: #ff7b7b; }
+    .milan-excellent .milan-gauge-fill, .milan-gauge-fill.milan-excellent { background: linear-gradient(90deg,#2da85c,#7fdb96); }
+    .milan-good      .milan-gauge-fill, .milan-gauge-fill.milan-good      { background: linear-gradient(90deg,#b89020,#f0d080); }
+    .milan-average   .milan-gauge-fill, .milan-gauge-fill.milan-average   { background: linear-gradient(90deg,#c07020,#ffaa55); }
+    .milan-poor      .milan-gauge-fill, .milan-gauge-fill.milan-poor      { background: linear-gradient(90deg,#aa2020,#ff7b7b); }
+    /* Koot table */
+    .koot-table-wrap {
+      overflow-x: auto;
+      background: linear-gradient(135deg, rgba(26,13,53,0.9), rgba(13,6,32,0.95));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 14px;
+      padding: 8px;
+      margin-bottom: 28px;
+    }
+    .koot-table { width:100%; border-collapse:collapse; font-size:0.92rem; }
+    .koot-table th {
+      font-family:'Cinzel',serif; color:var(--gold);
+      font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:600;
+      padding: 12px 14px; text-align:left; border-bottom:1px solid rgba(201,168,76,0.15);
+    }
+    .koot-table td { padding:11px 14px; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top; }
+    .koot-dim  { font-size:0.82rem; color:rgba(232,220,200,0.6); font-style:italic; }
+    .koot-val  { font-size:0.88rem; color:rgba(232,220,200,0.85); }
+    .koot-score-cell { font-family:'Cinzel',serif; font-size:1.05rem; text-align:right; }
+    .koot-max-cell   { text-align:right; color:rgba(201,168,76,0.45); }
+    .koot-good td { background:rgba(127,219,150,0.05); }
+    .koot-good .koot-score-cell { color: var(--good); }
+    .koot-mid  td { background:rgba(240,208,128,0.04); }
+    .koot-mid  .koot-score-cell { color: var(--gold); }
+    .koot-bad  td { background:rgba(255,123,123,0.05); }
+    .koot-bad  .koot-score-cell { color: var(--bad); }
+    .koot-total-row td { border-top:1px solid rgba(201,168,76,0.2); background:rgba(123,45,139,0.15); }
+    /* Partner section separator */
+    .partner-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.45), transparent);
+      margin: 20px 0;
+    }
+    .partner-section-title {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      text-align: center;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 18px;
+    }
+
     /* ── Reset / disclaimer ── */
     .reset-btn {
       display: block;
@@ -1461,6 +1624,7 @@
             <option value="general">General Lifetime Reading</option>
             <option value="yearly">Yearly Predictions</option>
             <option value="monthly">Monthly Predictions</option>
+            <option value="milan">Kundali Milan (Compatibility)</option>
           </select>
         </div>
         <div class="form-group">
@@ -1474,7 +1638,52 @@
           </select>
         </div>
       </div>
-      <button type="submit" class="btn">Reveal My Destiny ✦</button>
+      <!-- ── Partner section (Kundali Milan only) ── -->
+      <div id="partner-section" style="display:none;">
+        <div class="partner-divider"></div>
+        <p class="partner-section-title">✦ Partner's Birth Details ✦</p>
+        <div class="form-group">
+          <label>Partner's Name</label>
+          <input type="text" id="p2-name" placeholder="Enter partner's full name" />
+        </div>
+        <div class="form-group">
+          <label>Partner's Place of Birth <span class="hint">(start typing — pick from list)</span></label>
+          <input type="text" id="p2-pob" list="p2-city-list" placeholder="e.g. Delhi, Chennai, London" />
+          <datalist id="p2-city-list"></datalist>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Partner's Date of Birth</label>
+            <input type="date" id="p2-dob" />
+          </div>
+          <div class="form-group">
+            <label>Partner's Time of Birth <span class="hint">(as accurate as possible)</span></label>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <select id="p2-tob-hour">
+                <option value="">Hour</option>
+                <option>12 AM</option><option>1 AM</option><option>2 AM</option>
+                <option>3 AM</option><option>4 AM</option><option>5 AM</option>
+                <option>6 AM</option><option>7 AM</option><option>8 AM</option>
+                <option>9 AM</option><option>10 AM</option><option>11 AM</option>
+                <option>12 PM</option><option>1 PM</option><option>2 PM</option>
+                <option>3 PM</option><option>4 PM</option><option>5 PM</option>
+                <option>6 PM</option><option>7 PM</option><option>8 PM</option>
+                <option>9 PM</option><option>10 PM</option><option>11 PM</option>
+              </select>
+              <select id="p2-tob-min">
+                <option value="">Min</option>
+                <option>00</option><option>05</option><option>10</option>
+                <option>15</option><option>20</option><option>25</option>
+                <option>30</option><option>35</option><option>40</option>
+                <option>45</option><option>50</option><option>55</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:0.8rem; color:rgba(201,168,76,0.55); font-style:italic; text-align:center; margin-bottom:4px;">Person 1 (above) = Groom / Partner A &nbsp;·&nbsp; Person 2 (partner, here) = Bride / Partner B</p>
+      </div>
+
+      <button type="submit" class="btn" id="submit-btn">Reveal My Destiny ✦</button>
     </form>
   </div>
 </section>
@@ -1530,6 +1739,36 @@
 
 <!-- Engine: load order matters -->
 <script src="cities.js"></script>
+<script>
+// Populate partner city datalist after cities.js has loaded
+(function() {
+  const dl = document.getElementById('p2-city-list');
+  if (dl && typeof CITIES !== 'undefined') {
+    const frag = document.createDocumentFragment();
+    for (const c of CITIES) {
+      const o = document.createElement('option');
+      o.value = `${c.n}, ${c.c}`;
+      frag.appendChild(o);
+    }
+    dl.appendChild(frag);
+  }
+  // Show/hide partner section and update button text
+  const rt = document.getElementById('reading-type');
+  const ps = document.getElementById('partner-section');
+  const btn = document.getElementById('submit-btn');
+  if (rt && ps) {
+    rt.addEventListener('change', function() {
+      if (this.value === 'milan') {
+        ps.style.display = 'block';
+        btn.textContent = 'Calculate Compatibility ✦';
+      } else {
+        ps.style.display = 'none';
+        btn.textContent = 'Reveal My Destiny ✦';
+      }
+    });
+  }
+})();
+</script>
 <script src="astro.js"></script>
 <script src="interpret.js"></script>
 <script src="yoga.js"></script>
@@ -1538,6 +1777,7 @@
 <script src="panchang.js"></script>
 <script src="ashtakavarga.js"></script>
 <script src="forecast.js"></script>
+<script src="kundali.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

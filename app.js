@@ -105,6 +105,7 @@
     const mdVichar     = window.Vichar.buildMangalVichar(positions, lagnaSignIdx);
 
     const birthDate    = new Date(yyyy, mm-1, dd);
+    const todayPanchang = window.Panchang.computePanchang(new Date());
     const yearlyFc     = window.Forecast.buildYearlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
     const monthlyFc    = window.Forecast.buildMonthlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
 
@@ -115,7 +116,7 @@
       positions, doshas, remedies, houseRead, dashaResult,
       yogas, navamsha, aspectInsights,
       ssVichar, ksdVichar, mdVichar,
-      yearlyFc, monthlyFc
+      yearlyFc, monthlyFc, todayPanchang
     });
   });
 
@@ -148,6 +149,10 @@
         ${trioCard('Janma Rashi (Moon)', moonSign, d.moonDecoded, 'Your mind, emotions and destiny')}
         ${trioCard('Surya Rashi (Sun)', sunSign, d.sunDecoded, 'Your soul, will and life force')}
       </div>
+
+      <h3 class="section-title">✦ Aaj Ka Panchang — Today's Almanac ✦</h3>
+      <p class="section-note">The five Vedic almanac elements for today. Tithi and Yoga change during the day — these values are computed for noon IST as a daily reference.</p>
+      ${window.Panchang.renderPanchangHTML(d.todayPanchang)}
 
       <h3 class="section-title">✦ Rashi Chakra ✦</h3>
       <p class="section-note" style="margin-bottom:14px">North Indian chart — Lagna (Ascendant) always in the top-centre cell. Houses run clockwise. Planet symbols: Su Sun · Mo Moon · Ma Mars · Me Mercury · Ju Jupiter · Ve Venus · Sa Saturn · Ra Rahu · Ke Ketu · ℞ retrograde.</p>

@@ -77,16 +77,17 @@
     const moonDecoded  = window.Interpret.decodeLongitude(sidereal.Moon);
     const sunDecoded   = window.Interpret.decodeLongitude(sidereal.Sun);
 
-    const positions = window.Interpret.buildPositions(sidereal, lagnaSignIdx, sidereal.Sun);
-    const doshas    = window.Interpret.detectDoshas(positions, lagnaSignIdx, new Date());
-    const remedies  = window.Interpret.buildRemedies(doshas, positions);
-    const houseRead = window.Interpret.buildHousePredictions(positions, lagnaSignIdx, concern);
+    const positions  = window.Interpret.buildPositions(sidereal, lagnaSignIdx, sidereal.Sun);
+    const doshas     = window.Interpret.detectDoshas(positions, lagnaSignIdx, new Date());
+    const remedies   = window.Interpret.buildRemedies(doshas, positions);
+    const houseRead  = window.Interpret.buildHousePredictions(positions, lagnaSignIdx, concern);
+    const dashaResult = window.Dasha.computeDashas(sidereal.Moon, new Date(yyyy, mm-1, dd));
 
     renderResults({
       name, city, dob: new Date(yyyy, mm-1, dd),
       hour, minute, concern,
       chart, lagnaDecoded, moonDecoded, sunDecoded,
-      positions, doshas, remedies, houseRead
+      positions, doshas, remedies, houseRead, dashaResult
     });
   });
 
@@ -138,6 +139,12 @@
       <h3 class="section-title">✦ Reading for ${escapeHtml(concernTitle(d.concern))} ✦</h3>
       <div class="house-grid">
         ${d.houseRead.map(houseCard).join('')}
+      </div>
+
+      <h3 class="section-title">✦ Vimshottari Dasha — Your Planetary Periods ✦</h3>
+      <p class="section-note">The Dasha system is Jyotish's timing engine — it tells you <em>when</em> chart promises ripen. The Mahadasha is the major period (years), the Antardasha the sub-period (months), and the Pratyantar the current fortnight-scale influence.</p>
+      <div id="dasha-section">
+        ${window.Dasha.renderDashaHTML(d.dashaResult)}
       </div>
     `;
 

@@ -77,17 +77,22 @@
     const moonDecoded  = window.Interpret.decodeLongitude(sidereal.Moon);
     const sunDecoded   = window.Interpret.decodeLongitude(sidereal.Sun);
 
-    const positions  = window.Interpret.buildPositions(sidereal, lagnaSignIdx, sidereal.Sun);
-    const doshas     = window.Interpret.detectDoshas(positions, lagnaSignIdx, new Date());
-    const remedies   = window.Interpret.buildRemedies(doshas, positions);
-    const houseRead  = window.Interpret.buildHousePredictions(positions, lagnaSignIdx, concern);
-    const dashaResult = window.Dasha.computeDashas(sidereal.Moon, new Date(yyyy, mm-1, dd));
+    const positions    = window.Interpret.buildPositions(sidereal, lagnaSignIdx, sidereal.Sun);
+    const doshas       = window.Interpret.detectDoshas(positions, lagnaSignIdx, new Date());
+    const remedies     = window.Interpret.buildRemedies(doshas, positions);
+    const houseRead    = window.Interpret.buildHousePredictions(positions, lagnaSignIdx, concern);
+    const dashaResult  = window.Dasha.computeDashas(sidereal.Moon, new Date(yyyy, mm-1, dd));
+    const yogas        = window.Yoga.detectYogas(positions, lagnaSignIdx, sidereal);
+    const navamsha     = window.Yoga.buildNavamsha(sidereal);
+    const aspects      = window.Yoga.buildAspects(positions);
+    const aspectInsights = window.Yoga.buildAspectInsights(positions, lagnaSignIdx, aspects);
 
     renderResults({
       name, city, dob: new Date(yyyy, mm-1, dd),
       hour, minute, concern,
       chart, lagnaDecoded, moonDecoded, sunDecoded,
-      positions, doshas, remedies, houseRead, dashaResult
+      positions, doshas, remedies, houseRead, dashaResult,
+      yogas, navamsha, aspectInsights
     });
   });
 
@@ -136,6 +141,14 @@
         </table>
       </div>
 
+      <h3 class="section-title">✦ Navamsha — D9 Divisional Chart ✦</h3>
+      <p class="section-note">The Navamsha (D9) is the most important divisional chart in Jyotish. It reveals the inner strength of each planet and is essential for understanding marriage, deeper character, and whether birth-chart promises will bear fruit. A Vargottama planet (same sign in D1 &amp; D9) is exceptionally powerful.</p>
+      ${window.Yoga.renderNavamshaHTML(d.navamsha)}
+
+      <h3 class="section-title">✦ Planetary Aspects (Graha Drishti) ✦</h3>
+      <p class="section-note">In Vedic astrology all planets cast a full aspect on the 7th house. Mars additionally aspects the 4th &amp; 8th; Jupiter the 5th &amp; 9th; Saturn the 3rd &amp; 10th. Notable patterns in your chart:</p>
+      ${window.Yoga.renderAspectsHTML(d.aspectInsights)}
+
       <h3 class="section-title">✦ Reading for ${escapeHtml(concernTitle(d.concern))} ✦</h3>
       <div class="house-grid">
         ${d.houseRead.map(houseCard).join('')}
@@ -146,6 +159,10 @@
       <div id="dasha-section">
         ${window.Dasha.renderDashaHTML(d.dashaResult)}
       </div>
+
+      <h3 class="section-title">✦ Yogas in Your Chart ✦</h3>
+      <p class="section-note">Yogas are planetary combinations that amplify or challenge specific life themes. Auspicious yogas are latent gifts waiting to be activated — especially during the Dasha of the planets involved.</p>
+      ${window.Yoga.renderYogasHTML(d.yogas)}
     `;
 
     if (d.doshas.length) {

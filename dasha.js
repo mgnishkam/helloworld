@@ -21,7 +21,7 @@ const NAK_LORD = [
   'Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'
 ];
 
-const NAK_SPAN = 360 / 27;  // 13.3333°
+// NAK_SPAN (360/27) is defined in interpret.js; do not re-declare here.
 
 // Add a fractional number of years to a Date, returning a new Date.
 function addYears(date, years) {

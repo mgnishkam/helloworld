@@ -160,9 +160,9 @@
               return `<tr>
                 <td><strong>${p.planet}</strong></td>
                 <td>${SIGNS[p.d10Sign].symbol} ${SIGNS[p.d10Sign].english}</td>
-                <td>H${p.d10House} &mdash; <em style="color:rgba(195,195,195,0.6)">${HOUSE_THEME[p.d10House-1]}</em></td>
+                <td>H${p.d10House} &mdash; <em style="color:rgba(60,60,60,0.7)">${HOUSE_THEME[p.d10House-1]}</em></td>
                 <td class="${dc}">${p.d10Dignity || 'neutral'}</td>
-                <td style="font-size:0.83rem;color:rgba(195,195,195,0.72)">${CAREER_THEME[p.planet]}</td>
+                <td style="font-size:0.83rem;color:rgba(60,60,60,0.8)">${CAREER_THEME[p.planet]}</td>
               </tr>`;
             }).join('')}
           </tbody>

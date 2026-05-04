@@ -213,7 +213,7 @@
       Jupiter:'pl-jupiter', Venus:'pl-venus', Saturn:'pl-saturn',
       Rahu:'pl-rahu', Ketu:'pl-ketu'
     };
-    const GRADE_COLOR = { A:'#e8e8e8', B:'#c8c8c8', C:'#a8a8a8', D:'#787878', F:'#505050' };
+    const GRADE_COLOR = { A:'#1a1a1a', B:'#3a3a3a', C:'#5a5a5a', D:'#7a7a7a', F:'#9a9a9a' };
 
     function bar(val, max, cls) {
       const pct = Math.min(100, Math.round(val / max * 100));

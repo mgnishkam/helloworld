@@ -195,7 +195,13 @@ function helio(planet, T) {
 }
 
 // Geocentric ecliptic longitude of a planet (tropical, degrees).
+// Handles all nine Vedic grahas: routes Sun/Moon/Rahu/Ketu to their
+// dedicated functions; uses Keplerian elements for the five visible planets.
 function planetLongitude(planet, jd) {
+  if (planet === 'Sun')  return sunLongitude(jd);
+  if (planet === 'Moon') return moonLongitude(jd);
+  if (planet === 'Rahu') return rahuLongitude(jd);
+  if (planet === 'Ketu') return norm360(rahuLongitude(jd) + 180);
   const T = (jd - 2451545.0) / 36525.0;
   const p = helio(planet, T);
   const e = helio('Earth', T);

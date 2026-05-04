@@ -39,7 +39,7 @@
 
   document.getElementById('astro-form').addEventListener('submit', function (e) {
     e.preventDefault();
-
+    try {
     const name        = document.getElementById('name').value.trim();
     const pobRaw      = document.getElementById('pob').value.trim();
     const dobVal      = document.getElementById('dob').value;
@@ -176,6 +176,16 @@
       ssVichar, ksdVichar, mdVichar,
       yearlyFc, monthlyFc, todayPanchang, avData, d10Data, shadData
     });
+    } catch (err) {
+      const r = document.getElementById('results');
+      r.style.display = 'block';
+      r.innerHTML = `<div style="background:#fff3f3;border:1px solid #c00;border-radius:12px;padding:24px;margin:20px 0;font-family:monospace;color:#900;max-width:900px;margin:20px auto">
+        <strong>Error generating your reading:</strong><br/><br/>
+        ${err.message}<br/><br/>
+        <small style="opacity:0.7">${err.stack ? err.stack.replace(/</g,'&lt;') : ''}</small>
+      </div>`;
+      r.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
   });
 
   function renderResults(d) {

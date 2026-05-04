@@ -39,9 +39,7 @@
     return `UTC${sign}${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
   }
 
-  document.getElementById('astro-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-
+  function handleSubmit() {
     // Show loading state immediately so the user knows the click registered
     const submitBtn = document.getElementById('submit-btn');
     if (submitBtn) { submitBtn.textContent = 'Computing your chart…'; submitBtn.disabled = true; }
@@ -198,7 +196,12 @@
       const btn = document.getElementById('submit-btn');
       if (btn) { btn.textContent = 'Reveal My Destiny ✦'; btn.disabled = false; }
     }
-  });
+  }
+
+  // Expose to onclick attribute and also wire form submit as backup
+  window._jyotishSubmit = handleSubmit;
+  const _form = document.getElementById('astro-form');
+  if (_form) _form.addEventListener('submit', function(e) { e.preventDefault(); handleSubmit(); });
 
   function renderResults(d) {
     const r = document.getElementById('results');

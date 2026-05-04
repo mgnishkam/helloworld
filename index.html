@@ -1772,25 +1772,25 @@
 <section class="form-section">
   <div class="card">
     <h2>✦ Enter Your Birth Details ✦</h2>
-    <form id="astro-form" autocomplete="off">
+    <form id="astro-form" autocomplete="off" onsubmit="return false;">
       <div class="form-group">
         <label>Your Name</label>
-        <input type="text" id="name" placeholder="Enter your full name" required />
+        <input type="text" id="name" placeholder="Enter your full name" />
       </div>
       <div class="form-group">
         <label>Place of Birth <span class="hint">(start typing — pick from the list)</span></label>
-        <input type="text" id="pob" list="city-list" placeholder="e.g. Mumbai, Varanasi, London" required />
+        <input type="text" id="pob" list="city-list" placeholder="e.g. Mumbai, Varanasi, London" />
         <datalist id="city-list"></datalist>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>Date of Birth</label>
-          <input type="date" id="dob" required />
+          <input type="date" id="dob" />
         </div>
         <div class="form-group">
           <label>Time of Birth <span class="hint">(as accurate as possible)</span></label>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <select id="tob-hour" required>
+            <select id="tob-hour">
               <option value="">Hour</option>
               <option>12 AM</option><option>1 AM</option><option>2 AM</option>
               <option>3 AM</option><option>4 AM</option><option>5 AM</option>
@@ -1801,7 +1801,7 @@
               <option>6 PM</option><option>7 PM</option><option>8 PM</option>
               <option>9 PM</option><option>10 PM</option><option>11 PM</option>
             </select>
-            <select id="tob-min" required>
+            <select id="tob-min">
               <option value="">Min</option>
               <option>00</option><option>05</option><option>10</option>
               <option>15</option><option>20</option><option>25</option>
@@ -1877,7 +1877,7 @@
         <p style="font-size:0.8rem; color:rgba(87,87,87,0.55); font-style:italic; text-align:center; margin-bottom:4px;">Person 1 (above) = Groom / Partner A &nbsp;·&nbsp; Person 2 (partner, here) = Bride / Partner B</p>
       </div>
 
-      <button type="submit" class="btn" id="submit-btn">Reveal My Destiny ✦</button>
+      <button type="button" class="btn" id="submit-btn" onclick="window._jyotishSubmit && window._jyotishSubmit()">Reveal My Destiny ✦</button>
     </form>
   </div>
 </section>

@@ -163,6 +163,7 @@
     const todayPanchang = window.Panchang.computePanchang(new Date());
     const avData        = window.Ashtakavarga.buildAshtakavarga(positions, lagnaSignIdx, sidereal);
     const d10Data       = window.Dashamsha.buildDashamsha(positions, lagnaDecoded);
+    const shadData      = window.Shadbala.buildShadbala(positions, chart);
     const yearlyFc     = window.Forecast.buildYearlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
     const monthlyFc    = window.Forecast.buildMonthlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
 
@@ -173,7 +174,7 @@
       positions, doshas, remedies, houseRead, dashaResult,
       yogas, navamsha, aspectInsights,
       ssVichar, ksdVichar, mdVichar,
-      yearlyFc, monthlyFc, todayPanchang, avData, d10Data
+      yearlyFc, monthlyFc, todayPanchang, avData, d10Data, shadData
     });
   });
 
@@ -327,6 +328,13 @@
         <p class="section-note">No major doshas detected in this chart. The grahas are well placed; continue your spiritual practices and treat each planet's auspicious day with reverence to maintain this harmony.</p>
       `;
     }
+
+    // Shadbala
+    html += `
+      <h3 class="section-title">✦ Shadbala — Six-Fold Planetary Strength ✦</h3>
+      <p class="section-note">Shadbala measures each planet's strength across six classical dimensions: Sthanabala (positional), Digbala (directional), Kalabala (temporal), Chestabala (motional), Naisargikabala (natural), and Drikbala (aspectual). Stronger planets deliver their significations readily; weak planets benefit most from targeted upayas (remedies).</p>
+      ${window.Shadbala.renderShadabalaHTML(d.shadData)}
+    `;
 
     // Ashtakavarga
     html += `

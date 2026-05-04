@@ -1347,6 +1347,122 @@
     .ss-dates { flex: 1; color: rgba(232,220,200,0.75); font-style: italic; }
     .ss-dur   { font-size: 0.82rem; color: rgba(201,168,76,0.55); }
 
+    /* ── Shadbala ── */
+    .sb-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .sb-summary-block {
+      background: linear-gradient(135deg, rgba(26,13,53,0.9), rgba(13,6,32,0.95));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 14px;
+      padding: 20px 22px;
+    }
+    .sb-summary-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.65);
+      margin-bottom: 14px;
+    }
+    .sb-summary-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+    .sb-sum-planet  { font-family:'Cinzel',serif; font-size:0.95rem; min-width:80px; }
+    .sb-sum-grade   { font-size:0.78rem; font-weight:600; min-width:60px; }
+    .sb-sum-area    { font-size:0.78rem; color:rgba(232,220,200,0.6); font-style:italic; }
+    .sb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+    .sb-card {
+      background: linear-gradient(135deg, rgba(26,13,53,0.9), rgba(13,6,32,0.95));
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 14px;
+      padding: 18px 20px;
+      transition: border-color 0.3s;
+    }
+    .sb-card:hover { border-color: rgba(201,168,76,0.4); }
+    .sb-card-head {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .sb-card-planet { font-family:'Cinzel',serif; font-size:1.15rem; flex:1; }
+    .sb-card-grade  { font-family:'Cinzel',serif; font-size:1.35rem; font-weight:700; }
+    .sb-card-score  { font-size:0.85rem; color:rgba(201,168,76,0.65); }
+    .sb-viru        { font-size:0.7rem; opacity:0.7; }
+    .sb-total-bar-bg {
+      height: 8px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 100px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .sb-total-bar { height: 100%; border-radius: 100px; }
+    .sb-card-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .sb-flag {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+    .sb-retro   { background:rgba(201,168,76,0.15); color:var(--gold); border:1px solid rgba(201,168,76,0.3); }
+    .sb-combust { background:rgba(255,180,50,0.12); color:#ffcc55; border:1px solid rgba(255,180,50,0.25); }
+    .sb-exalt   { background:rgba(127,219,150,0.12); color:var(--good); border:1px solid rgba(127,219,150,0.25); }
+    .sb-debil   { background:rgba(255,123,123,0.1); color:var(--bad); border:1px solid rgba(255,123,123,0.2); }
+    .sb-comps   { display:flex; flex-direction:column; gap:5px; margin-bottom:12px; }
+    .sb-comp-row {
+      display: grid;
+      grid-template-columns: 62px 1fr 30px;
+      align-items: center;
+      gap: 8px;
+      cursor: default;
+    }
+    .sb-comp-label { font-size:0.7rem; color:rgba(201,168,76,0.65); letter-spacing:0.05em; }
+    .sb-comp-bar-bg {
+      height: 5px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .sb-comp-bar { height:100%; border-radius:100px; opacity:0.75; }
+    /* Reuse planet colour classes for bars */
+    .sb-comp-bar.pl-sun      { background: #ffcc44; }
+    .sb-comp-bar.pl-moon     { background: #c8e8ff; }
+    .sb-comp-bar.pl-mars     { background: #ff7b7b; }
+    .sb-comp-bar.pl-mercury  { background: #7fdb96; }
+    .sb-comp-bar.pl-jupiter  { background: #f0d080; }
+    .sb-comp-bar.pl-venus    { background: #ffb3d9; }
+    .sb-comp-bar.pl-saturn   { background: #a0b4cc; }
+    .sb-comp-bar.pl-rahu     { background: #c084fc; }
+    .sb-comp-bar.pl-ketu     { background: #fbbf72; }
+    .sb-comp-val { font-size:0.68rem; color:rgba(232,220,200,0.55); text-align:right; }
+    .sb-card-interp {
+      font-size: 0.84rem;
+      line-height: 1.65;
+      color: rgba(232,220,200,0.75);
+      font-style: italic;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+
     /* ── D10 Dashamsha ── */
     .d10-top-wrap {
       margin: 24px 0;
@@ -1857,6 +1973,7 @@
 <script src="forecast.js"></script>
 <script src="kundali.js"></script>
 <script src="dashamsha.js"></script>
+<script src="shadbala.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

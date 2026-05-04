@@ -6,16 +6,18 @@
   'use strict';
 
   // ── City autocomplete: populate <datalist> from CITIES ──
-  const dl = document.getElementById('city-list');
-  if (dl) {
-    const frag = document.createDocumentFragment();
-    for (const c of CITIES) {
-      const o = document.createElement('option');
-      o.value = `${c.n}, ${c.c}`;
-      frag.appendChild(o);
+  try {
+    const dl = document.getElementById('city-list');
+    if (dl && typeof CITIES !== 'undefined') {
+      const frag = document.createDocumentFragment();
+      for (const c of CITIES) {
+        const o = document.createElement('option');
+        o.value = `${c.n}, ${c.c}`;
+        frag.appendChild(o);
+      }
+      dl.appendChild(frag);
     }
-    dl.appendChild(frag);
-  }
+  } catch(e) { console.warn('City list error:', e); }
 
   // ── Decimal degrees → "12°34'56\"" ──
   function fmtDeg(d) {
@@ -39,6 +41,13 @@
 
   document.getElementById('astro-form').addEventListener('submit', function (e) {
     e.preventDefault();
+
+    // Show loading state immediately so the user knows the click registered
+    const submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) { submitBtn.textContent = 'Computing your chart…'; submitBtn.disabled = true; }
+    const r0 = document.getElementById('results');
+    if (r0) { r0.style.display = 'block'; r0.innerHTML = '<p style="text-align:center;padding:40px;font-style:italic;color:#555">Calculating your Vedic chart — please wait…</p>'; r0.scrollIntoView({behavior:'smooth',block:'start'}); }
+
     try {
     const name        = document.getElementById('name').value.trim();
     const pobRaw      = document.getElementById('pob').value.trim();
@@ -185,6 +194,9 @@
         <small style="opacity:0.7">${err.stack ? err.stack.replace(/</g,'&lt;') : ''}</small>
       </div>`;
       r.scrollIntoView({ behavior:'smooth', block:'start' });
+    } finally {
+      const btn = document.getElementById('submit-btn');
+      if (btn) { btn.textContent = 'Reveal My Destiny ✦'; btn.disabled = false; }
     }
   });
 

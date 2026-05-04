@@ -1347,6 +1347,84 @@
     .ss-dates { flex: 1; color: rgba(232,220,200,0.75); font-style: italic; }
     .ss-dur   { font-size: 0.82rem; color: rgba(201,168,76,0.55); }
 
+    /* ── D10 Dashamsha ── */
+    .d10-top-wrap {
+      margin: 24px 0;
+      background: linear-gradient(135deg, rgba(26,13,53,0.9), rgba(13,6,32,0.95));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .d10-top-title {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 0.88rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .d10-top-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .d10-top-card {
+      background: rgba(123,45,139,0.15);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+    }
+    .d10-rank { font-size: 1.6rem; color: var(--gold); margin-bottom: 6px; }
+    .d10-planet-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+    }
+    .d10-house-badge {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.7);
+      margin-bottom: 6px;
+    }
+    .d10-dignity { font-size: 0.8rem; font-style: italic; margin-bottom: 8px; }
+    .d10-dignity.good { color: var(--good); }
+    .d10-dignity.bad  { color: var(--bad); }
+    .d10-career-kw { font-size: 0.8rem; color: rgba(232,220,200,0.7); line-height: 1.55; }
+    .d10-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .d10-info-card {
+      background: linear-gradient(135deg, rgba(26,13,53,0.9), rgba(13,6,32,0.95));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .d10-info-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.65);
+      margin-bottom: 8px;
+    }
+    .d10-info-sign {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      margin-bottom: 10px;
+    }
+    .d10-info-text {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: rgba(232,220,200,0.75);
+      font-style: italic;
+    }
+
     /* ── Kundali Milan ── */
     .milan-header {
       display: flex;
@@ -1778,6 +1856,7 @@
 <script src="ashtakavarga.js"></script>
 <script src="forecast.js"></script>
 <script src="kundali.js"></script>
+<script src="dashamsha.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

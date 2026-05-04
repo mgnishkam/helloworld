@@ -162,6 +162,7 @@
     const birthDate    = new Date(yyyy, mm-1, dd);
     const todayPanchang = window.Panchang.computePanchang(new Date());
     const avData        = window.Ashtakavarga.buildAshtakavarga(positions, lagnaSignIdx, sidereal);
+    const d10Data       = window.Dashamsha.buildDashamsha(positions, lagnaDecoded);
     const yearlyFc     = window.Forecast.buildYearlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
     const monthlyFc    = window.Forecast.buildMonthlyForecast(dashaResult, positions, lagnaSignIdx, moonDecoded.signIdx, birthDate);
 
@@ -172,7 +173,7 @@
       positions, doshas, remedies, houseRead, dashaResult,
       yogas, navamsha, aspectInsights,
       ssVichar, ksdVichar, mdVichar,
-      yearlyFc, monthlyFc, todayPanchang, avData
+      yearlyFc, monthlyFc, todayPanchang, avData, d10Data
     });
   });
 
@@ -282,6 +283,10 @@
       <h3 class="section-title">✦ Navamsha — D9 Divisional Chart ✦</h3>
       <p class="section-note">The Navamsha (D9) is the most important divisional chart in Jyotish. It reveals the inner strength of each planet and is essential for understanding marriage, deeper character, and whether birth-chart promises will bear fruit. A Vargottama planet (same sign in D1 &amp; D9) is exceptionally powerful.</p>
       ${window.Yoga.renderNavamshaHTML(d.navamsha)}
+
+      <h3 class="section-title">✦ Dashamsha D10 — Career &amp; Status Chart ✦</h3>
+      <p class="section-note">The Dashamsha (D10) is the divisional chart of career, profession and social achievement. It shows which planets most powerfully shape your professional life and what fields are karmically indicated. ★ = exalted &nbsp; ◆ = own sign &nbsp; ▼ = debilitated in D10.</p>
+      ${window.Dashamsha.renderDashamshaHTML(d.d10Data)}
 
       <h3 class="section-title">✦ Planetary Aspects (Graha Drishti) ✦</h3>
       <p class="section-note">In Vedic astrology all planets cast a full aspect on the 7th house. Mars additionally aspects the 4th &amp; 8th; Jupiter the 5th &amp; 9th; Saturn the 3rd &amp; 10th. Notable patterns in your chart:</p>
